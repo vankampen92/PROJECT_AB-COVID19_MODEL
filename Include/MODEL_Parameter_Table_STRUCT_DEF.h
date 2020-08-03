@@ -126,11 +126,6 @@ typedef struct Parameter_Tableinfo
   double * Vector_Model_Variables_Time_0;
   double * Vector_Model_Variables_Stationarity;
   double ** Vector_Model_Variables_MultiStability;
-  int * Vector_Model_Int_Variables;               /* Stochastic Dynamics */
-  int * Vector_Model_Int_Variables_Time_0;        /* Stochastic Dynamics */
-
-  double *** Metapop_Connectivity_Matrix; 
-
   /*
      Evaluation of the largest (xmax) and the tiniest (xmin)
      numbers my machine can handle
@@ -144,13 +139,19 @@ typedef struct Parameter_Tableinfo
 #if defined CPGPLOT_REPRESENTATION
 #include <include.CPG.global.h>
   Parameter_CPGPLOT * CPG;
+  Parameter_CPGPLOT * CPG_STO; 
 #endif
 
+  int * Vector_Model_Int_Variables;               /* Stochastic Dynamics */
+  int * Vector_Model_Int_Variables_Time_0;        /* Stochastic Dynamics */
+  double *** Metapop_Connectivity_Matrix; 
+  Community ** Patch_System;                      /* Stochastic Dynamics */
+  
   int No_of_NEIGHBORS;
   int TYPE_of_NETWORK;
-  int TOTAL_No_of_EVENTS;
+  int TOTAL_No_of_EVENTS;                         /* Stochastic Dynamics */
   /* Total Number of Events within a patch, i.e., 25 * 4 = 100 */
-  int No_of_EVENTS;
+  int No_of_EVENTS;                               /* Stochastic Dynamics */
   
 }Parameter_Table;
 

@@ -47,8 +47,8 @@ void Initial_Conditions_Stochastic_Dynamics( Parameter_Table * Table, double * y
   Patch_System_Initialization (PATCH, Table, y_INI);
 
   for (i=0; i<Table->MODEL_STATE_VARIABLES; i++ ) {
-    Table->Vector_Model_Int_Variables[i]          = (int)y_INI[i];
-    Table->Vector_Model_Int_Variables_Time_0[i];  = (int)y_INI[i];     
+    Table->Vector_Model_Int_Variables[i]         = (int)y_INI[i];
+    Table->Vector_Model_Int_Variables_Time_0[i]  = (int)y_INI[i];     
   }
 }
 

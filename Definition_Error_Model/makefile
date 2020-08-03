@@ -3,7 +3,7 @@
 # =======================
 
 # Gnu C make cpgplot_GRID UTILS (libda_cpgplot_GRID.a)
-PROJECT_DIR          = ${HOME}/PROJECT_STD_AIDS_MODELS/
+PROJECT_DIR          = ${HOME}/PROJECT_AB-COVID19_MODEL/
 CPGPLOT              = ${HOME}/CPGPLOT/#########################
 LIB_DIR              = ${PROJECT_DIR}Library/Optimization_Library/
 RANDOM_DIR           = ${PROJECT_DIR}Library/GSL_RANDOM/

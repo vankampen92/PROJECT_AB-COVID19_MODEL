@@ -7,7 +7,7 @@
 
 gsl_rng * r; /* Global generator defined in main.c */
 
-/* This code calculates ODE model temporal evolution for a range of sexual-transmitted AIDS-HIV models
+/* This code calculates ODE model temporal evolution for a range COVID19 models
 
    Compilation (see makefile variable MODEL):
 
@@ -32,10 +32,9 @@ gsl_rng * r; /* Global generator defined in main.c */
 int main(int argc, char **argv)
 {
   int i; 
-  Parameter_Space Space;
   Parameter_Table Table;
   Time_Control Time;
-  Trend_Control * Tr;
+  Time_Dependence_Control Time_Dependence;
   P_ARG = &Table;
 
 #include "default.c"
@@ -63,21 +62,22 @@ int main(int argc, char **argv)
   Beta_31 = Beta;
   Beta_32 = Beta;
   Beta_33 = Beta;
-  
 
-  INITIAL_TOTAL_POPULATION    = H;                            
-  INITIAL_MOSQUITO_POPULATION = m * INITIAL_TOTAL_POPULATION; 
-  /* The two previous code lines overwrite any choice for -xH and -xM (initial values */ 
-  /* for human and mosquito populations, respectively) from the list of  input        */
-  /* arguments in favor of -H3 and -M4 arguments, which total human population        */
-  /* (H), and density of mosquitoes per human (m), respectively.                      */ 
+  #include "include.Output_Variables.default.aux.c"
   P_A_R_A_M_E_T_E_R___T_A_B_L_E___A_L_L_O_C(   &Table );
-  P_A_R_A_M_E_T_E_R___T_A_B_L_E___U_P_L_O_A_D( &Table );
+  P_A_R_A_M_E_T_E_R___T_A_B_L_E___U_P_L_O_A_D( &Table, Index_Output_Variables );
   printf(" Parameter_Table structure has been correctly allocated and initiated\n");
 
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___A_L_L_O_C( &Space, &Table );
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___U_P_L_O_A_D( &Space, &Table, A_n, A_d);
+  /* B E G I N : Reserving memmory for Parameter Space */
+  #include <include.Parameter_Space.default.aux.c>
+  Parameter_Space * Space = (Parameter_Space *)calloc(1, sizeof(Parameter_Space));
+  Parameter_Space_Alloc( Space, No_of_PARAMETERS, d);
+  Parameter_Space_Initialization( Space, No_of_PARAMETERS, TOLERANCE, MAX_No_of_ITERATIONS,
+    d, Index, Ranges, Acc);
+  Parameter_Table_Index_Update(Index, No_of_PARAMETERS, &Table);
+  Table.S = Space;
   printf(" Parameter_Space structure has been correctly allocated and initiated\n");
+  /*     E N D : ------------------------------------- */
 
   if (TYPE_of_TIME_DEPENDENCE == 0) {
     printf(" Time_Control structure will be allocated: \n");
@@ -142,31 +142,21 @@ int main(int argc, char **argv)
   M_O_D_E_L___S_T_O( &Table );
   
   /* BEGIN : -------------------------------------------------------------------------
-   *  Redimensioning Index vector to include and save the full list of model parameters
+   *  You may need to redimension Index vector to include and save the full list of 
+   *  model parameters.
    *  Redefinition of Parameter Space structure to allocate the whole parameter space
    *  Important note: 
-   *  This operation can only be done at the end of a main file (before freeing mem-
-   *  mory and ending). 
+   *  This operation can only be done at the end of a main file before freeing all mem-
+   *  mory and ending. 
+   *  (See also ./TEMPORAL_EVOLUTION_DETERMINISTIC/main.c) 
    */
-  printf("Redimensioning Index vector to include and save the full list of model parameters.\n");
-  printf("Accoringly, Parameter Space Struct is redefined to allocate the whole parameter space.\n");
-  printf("Important note:\n"); 
-  printf("\t\tThis operation can only be done at the end of a main file (before freeing mem-\n");
-  printf("\t\tmory and ending).\n");
-  printf("A latex table will be generated.\n"); 
-  free(Table.Index);
-  Table.Index = (int *)calloc( MODEL_PARAMETERS_MAXIMUM, sizeof(int) ); 
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___F_R_E_E( &Space );
-  SUB_MODEL_PARAMETERS = MODEL_PARAMETERS_MAXIMUM;
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___A_L_L_O_C( &Space, &Table );
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___U_P_L_O_A_D( &Space, &Table, A_n, A_d);
   char boundary_File[80];
   sprintf(boundary_File, "boundary_Model_Parameter.c");
   write_Parameter_Table___RANGES___VALUES___LATEX ( "Latex_Parameter_Table.tex",
                                                     boundary_File,
 						    &Table,
-						    Space.P_MAX->data,
-						    Space.P_min->data, Space.nPar );
+						    Space->P_MAX->data,
+						    Space->P_min->data, Space->No_of_PARAMETERS);
   /*  END : ------------------------------------------------------------------------*/
 
   /* BEGIN : Freeing All Memmory * * * * * * * * * * * * * * */
@@ -175,9 +165,18 @@ int main(int argc, char **argv)
   P_A_R_A_M_E_T_E_R___C_P_G_P_L_O_T___F_R_E_E( Table.CPG_STO, SUB_OUTPUT_VARIABLES );
   cpgclos();
 #endif
-  T_R_E_N_D___C_O_N_T_R_O_L___F_R_E_E( Tr );
-  T_I_M_E___C_O_N_T_R_O_L___F_R_E_E( &Time, &Table );
-  P_A_R_A_M_E_T_E_R___S_P_A_C_E___F_R_E_E( &Space );
+  
+#include <include.Parameter_Space.default.free.c>
+  Parameter_Space_Free(Space, No_of_PARAMETERS); free( Space );
+
+#include <include.Initial_Conditions.default.free.c>
+
+#include <include.Output_Variables.default.free.c>
+  
+#include <include.Time_Dependence_Control.default.free.c>
+  if (TYPE_of_TIME_DEPENDENCE == 0) T_I_M_E___C_O_N_T_R_O_L___F_R_E_E( &Time, &Table );
+  else                        Time_Dependence_Control_Free( &Time_Dependence, &Table );
+  
   P_A_R_A_M_E_T_E_R___T_A_B_L_E___F_R_E_E( &Table );
   /*  END : Freeing  All Memmory * * * * * * * * * * * * * * */
 

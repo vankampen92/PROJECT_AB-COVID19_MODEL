@@ -63,7 +63,7 @@ dydt[a1D] = Table->Delta_1 * y[n1Y];                                            
 dydt[n2S] = - ( Table->Beta_20 * Table->b / Table->N0 * (Table->Phi * y[n0I1] + y[n0A] + (1.0-Table->Eps_I) * (y[n0I2]+y[n0Ad]) + (1.0-Table->Eps_Y) * y[n0Y] ) +                        
 	        Table->Beta_21 * Table->b / Table->N1 * (Table->Phi * y[n1I1] + y[n1A] + (1.0-Table->Eps_I) * (y[n1I2]+y[n1Ad]) + (1.0-Table->Eps_Y) * y[n1Y] ) +                        
 	        Table->Beta_22 * Table->b / Table->N2 * (Table->Phi * y[n2I1] + y[n2A] + (1.0-Table->Eps_I) * (y[n2I2]+y[n2Ad]) + (1.0-Table->Eps_Y) * y[n2Y] ) +                        
-	        Table->Beta_13 * Table->b / Table->N3 * (Table->Phi * y[n3I1] + y[n3A] + (1.0-Table->Eps_I) * (y[n3I2]+y[n3Ad]) + (1.0-Table->Eps_Y) * y[n3Y] )                         
+	        Table->Beta_23 * Table->b / Table->N3 * (Table->Phi * y[n3I1] + y[n3A] + (1.0-Table->Eps_I) * (y[n3I2]+y[n3Ad]) + (1.0-Table->Eps_Y) * y[n3Y] )                         
 	       ) * y[n2S];                                                                                                                                                   /* n2S */
 
 dydt[n2E] =   ( Table->Beta_20 * Table->b / Table->N0 * (Table->Phi * y[n0I1] + y[n0A] + (1.0-Table->Eps_I) * (y[n0I2]+y[n0Ad]) + (1.0-Table->Eps_Y) * y[n0Y] ) +                        

@@ -28,9 +28,9 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
 
   Time         = Table->T;
   Time_Initial = Time->Time_0;
-  Time_Final   = Time->T->Time_1;
-  TIMES        = Time->T->I_Time;
-  Rate         = Table->T->Rate;
+  Time_Final   = Time->Time_1;
+  TIMES        = Time->I_Time;
+  Rate         = Time->Rate;
 
   /* Each stochastic realization will be saved in a different file */
   file[0]='\0';  fitxer(file, "re_", i, ".dat"); FP = fopen(file, "w");
@@ -92,7 +92,7 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
      * -------------------------------------------------------------------
      */
 
-    if( Time_Current > Time->Time_Vector[j] + P->Time->EPSILON){
+    if( Time_Current > Time->Time_Vector[j] + Time->EPSILON){
       (*Bad_Times)++;
 #if defined VERBOSE
       printf("Time too far away from target: skipping this time...\n");

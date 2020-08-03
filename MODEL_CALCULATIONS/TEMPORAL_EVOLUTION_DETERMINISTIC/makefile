@@ -3,7 +3,7 @@
 #/*                           David Alonso, 2011 (c)                          */
 #/*                                                                           */
 #/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-PROJECT_DIR=${HOME}/PROJECT_COVID19_MODELS/#########
+PROJECT_DIR=${HOME}/PROJECT_AB-COVID19_MODEL/#########
 TIME_TREND_DIR=${PROJECT_DIR}Definition_Time_Trend_Dependence/
 IO_DIR=${PROJECT_DIR}Library/IO_Library/
 OPT_DIR= ${PROJECT_DIR}Library/Optimization_Library/
@@ -50,7 +50,7 @@ TYPE_of_INDEX=_5p#   '_X2-Y_5p' /
 RANDOM_SEED=CURRENT_TIME_RDN_SEED####### 'CURRENT_TIME_RDN_SEED' / 'FILE_RND_SIDE'
 ##############################################################################################################
 ## C O M P I L A T I O N   O P T I O N S   C O N T R O L I N G   M O D E L   D E F I N I T I O N #############
-MODEL=SEI1I2AYR_AGE#  ######################################
+MODEL=SEI1I2AAdYR_AGE_MPOP#  ######################################
 ODE_MODEL=${MODEL}####################
 ################################################### (see rainTemperature.c) ##################################
 ## C O M P I L A T I O N   O P T I O N S   C O N T R O L I N G   N U M E R I C A L   I N T E G R A T I O N  ##

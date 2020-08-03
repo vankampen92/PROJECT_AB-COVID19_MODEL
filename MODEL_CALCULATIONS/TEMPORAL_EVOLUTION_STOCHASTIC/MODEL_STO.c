@@ -19,13 +19,13 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   int MODEL_STATE_VARIABLES = Table->MODEL_STATE_VARIABLES;
   Table->Vector_Model_Variables = (double *)calloc( MODEL_STATE_VARIABLES, sizeof(double) );
   Table->Vector_Model_Int_Variables = (int *)calloc( MODEL_STATE_VARIABLES, sizeof(int) );  
-  
+  Table->Vector_Model_Int_Variables_Time_0 = (int *)calloc( MODEL_STATE_VARIABLES, sizeof(int) );
   /* BEGIN : -------------------------------------------------------------------------
    * Stochastic Community Set Up
    */
   Community ** PATCH = (Community **)malloc( P->No_of_LOCAL_POPULATIONS * sizeof(Community *) );
-  C_O_M_M_U_N_I_T_Y___A_L_L_O_C_A_T_I_O_N ( PATCH, P ); 
-  C_O_M_M_U_N_I_T_Y___I_N_I_T_I_A_L_I_Z_A_T_I_O_N (PATCH, P);
+  Community_Allocation( PATCH, P ); 
+  Community_Initialization (PATCH, P);
   /* The Parameter Model structure also keeps the three memmory addresses pointing to 
    *   the Patch System, the Time Control structure, and the CPG structure to plot   
    */
@@ -55,7 +55,7 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
     printf("Realization: %d of a total of %d\n", i+1, Time->Realizations);
     printf("Time failed in %d occasions out of %d time steps\n", Bad_Times, I_Time);
     printf("If the number of failed times is too big, EPSILON might be too small!\n");
-    printf("Try to choose a larger EPSILON [Current value: -E %g]\n", P->Time->EPSILON);
+    printf("Try to choose a larger EPSILON [Current value: -E %g]\n", Time->EPSILON);
   }
   /* END: End of STOCHASTIC REALIZATIONS */
 
@@ -80,8 +80,9 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
 
   free( Table->Vector_Model_Variables ); 
   free( Table->Vector_Model_Int_Variables );
+  free( Table->Vector_Model_Int_Variables_Time_0 );
   
-  C_O_M_M_U_N_I_T_Y___F_R_E_E (PATCH, P->No_of_LOCAL_POPULATIONS);
+  Community_Free(PATCH, P);
   free ( P );
   
   return(0);

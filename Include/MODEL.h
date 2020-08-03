@@ -41,6 +41,8 @@ typedef struct totalRateinfo
 
 #include "MODEL_Parameter_Model_STRUCT_DEF.h"
 
+#include "MODEL_Community_STRUCT_DEF.h"
+
 #include "MODEL_Parameter_Space_STRUCT_DEF.h"
 
 #include "MODEL_Parameter_Table_STRUCT_DEF.h"
@@ -58,6 +60,8 @@ typedef struct totalRateinfo
 #include <Parameter_Model.h>
 
 #include <Parameter_Table.h>
+
+#include <Community.h>
 
 #include <In_Out_Migration_Functions.h>
 
@@ -100,6 +104,7 @@ typedef struct totalRateinfo
 #include <Definition_Time_Trend_Dependence/Time_Dependence_Control.h>
 #include <Definition_Time_Trend_Dependence/Trend_Control.h>
 #include <Definition_Parameter_Space/Parameter_Space.h>
+#include <Definition_Stochastic_Integration/Stochastic_Time_Dynamics.h>
 #include <Definition_Numerical_Integration/deterministic_time_dynamics.h>
 #include <Definition_Numerical_Integration/numerical_Integration_Driver.h>
 #include <Definition_Numerical_Integration/Initial_Conditions_Numerical_Integration.h>

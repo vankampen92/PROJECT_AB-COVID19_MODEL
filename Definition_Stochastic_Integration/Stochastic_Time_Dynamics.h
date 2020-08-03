@@ -34,3 +34,5 @@ void Some_Other_Patch_Population_Increase(int x, int a, int nS,
 
 void Positivity_Control( Parameter_Table * Table,
 			 int x, int jS, double * Y, int * J); 
+
+double Force_of_Infection_Sto ( Community * P, int * y, int age, Parameter_Table * Table );

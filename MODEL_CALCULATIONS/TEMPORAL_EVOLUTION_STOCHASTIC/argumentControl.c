@@ -3,6 +3,8 @@
 
 #include "extern.h"
 
+extern int * Index_Output_Variables; 
+
 extern int HELP_INPUT_ARGUMENTS;
 
 void ArgumentControl(int argc, char **argv)
@@ -28,11 +30,11 @@ void ArgumentControl(int argc, char **argv)
 #endif
 
 #include <include.Trend_Control.argumentControl.c>
-
 #include <include.Output_Variables.argumentControl.c>
 #include <include.Parameter_Model.argumentControl.c>
 #include <include.Parameter_Space.argumentControl.c>
 #include <include.Time_Control.argumentControl.c>
+#include <include.Time_Dependence_Control.argumentControl.c>
 
 #include <include.Initial_Conditions.argumentControl.c>
 
@@ -42,7 +44,7 @@ void ArgumentControl(int argc, char **argv)
 	    case 'h':
 
 	      P_A_R_A_M_E_T_E_R___T_A_B_L_E___A_L_L_O_C( P_ARG );
-	      P_A_R_A_M_E_T_E_R___T_A_B_L_E___U_P_L_O_A_D( P_ARG );
+	      P_A_R_A_M_E_T_E_R___T_A_B_L_E___U_P_L_O_A_D( P_ARG, Index_Output_Variables );
 	      Parameters_from_Command_Line(stdout, P_ARG);
 
 	      printf("\n");

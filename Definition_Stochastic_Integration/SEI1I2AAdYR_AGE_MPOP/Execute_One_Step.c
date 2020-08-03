@@ -11,9 +11,9 @@ extern gsl_rng * r;   /* Global generator (define at the main program level */
 void Execute_One_Step(Community ** SP,
 		      Parameter_Table * Table,
 		      double max_Probability, 
-		      int * Event, int * Patch) 
+		      int * Event, int * x_Patch) 
 {
-  int x, n_Event, k;
+  int x, n_Event, n, n_Event_within_Age_Class, Q, k;
   Community * Patch;
   Parameter_Model * P = Table->P;
   
@@ -32,7 +32,7 @@ void Execute_One_Step(Community ** SP,
   
   Patch = SP[x];  /* x represents the chosen patch undegoing a change. */    
 
-  n_Event = Discrete_Sampling(pVil->rToI, no_TOTAL_EVENTS) - 1; /* 0, ..., 99 */ 
+  n_Event = Discrete_Sampling(Patch->rToI, Table->TOTAL_No_of_EVENTS) - 1; /* 0, ..., 99 */ 
   
   n_Event_within_Age_Class = n_Event%Table->No_of_EVENTS;    /* 0, ..., 24 */ 
   n                        = n_Event/Table->No_of_EVENTS;    /* 0, ..., 3  */ 
@@ -49,7 +49,7 @@ void Execute_One_Step(Community ** SP,
   aR =  a0R  + n*Table->TOTAL_No_of_DISEASE_STAGES;  jaR = aR + x*Q;
   aD =  a0D  + n*Table->TOTAL_No_of_DISEASE_STAGES;  jaD = aD + x*Q;
  
-  switch( n_Event_with_Age_Class )
+  switch( n_Event_within_Age_Class )
     {
     case  0:  /* (Age n): Infection (S --> S-1 and E --> E + 1) */                               /* 1 */
       Positivity_Control( Table, x, jS, Y, J); 
@@ -163,7 +163,7 @@ void Execute_One_Step(Community ** SP,
                /*                                                    and AI --> AI + 1   */
       Y[jA]--;  J[jA]--;   Patch->n[nA]--;
       Y[jAd]++; J[jAd]++;  Patch->n[nAd]++;
-      Y[jaI]++; J[jaI]++;  Patch->n[naI]++;
+      Y[jaI]++; J[jaI]++;  Patch->n[aI]++;
       
       break;
     case  16:  /* 16 (Age n): Out-Migration (A --> A-1) and some other patch gains one */      /* Out A */
@@ -244,7 +244,7 @@ void Execute_One_Step(Community ** SP,
     }  
 
   
-  (*Event) = n_Event;  (*Patch) = x;
+  (*Event) = n_Event;  (*x_Patch) = x;
 }
 
 void Local_Population_Decrease ( int n, Community * Patch )
@@ -255,7 +255,7 @@ void Local_Population_Decrease ( int n, Community * Patch )
     case  0:  Patch->N0--; 
       break;
     case  1:  Patch->N1--;
-      break
+      break; 
     case  2:  Patch->N2--; 
       break;
     case  3:  Patch->N3--; 
@@ -276,7 +276,7 @@ void Local_Population_Increase ( int n, Community * Patch )
     case  0:  Patch->N0++; 
       break;
     case  1:  Patch->N1++;
-      break
+      break;
     case  2:  Patch->N2++; 
       break;
     case  3:  Patch->N3++; 
@@ -332,10 +332,11 @@ void Some_Other_Patch_Population_Increase(int x, int a, int nS,
  
   */
   int Q, k, j, n_Patch; 
-
+  Community ** Patch = Table->Patch_System;
+  
   int    * J = Table->Vector_Model_Int_Variables;
   double * Y = Table->Vector_Model_Variables;
-  
+
   Q = Table->TOTAL_No_of_DISEASE_STAGES * Table->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
 
   n_Patch = Discrete_Sampling(Patch[x]->Out_Migration_Vector[a], Patch[x]->No_NEI) - 1;

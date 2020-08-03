@@ -3,12 +3,13 @@
 #/*                           David Alonso, 2011 (c)                          */
 #/*                                                                           */
 #/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-PROJECT_DIR=${HOME}/PROJECT_COVID19_MODELS/#########
+PROJECT_DIR=${HOME}/PROJECT_AB-COVID19_MODEL/#########
 TIME_TREND_DIR=${PROJECT_DIR}Definition_Time_Trend_Dependence/
 IO_DIR=${PROJECT_DIR}Library/IO_Library/
 OPT_DIR= ${PROJECT_DIR}Library/Optimization_Library/
 ERROR_DIR=${PROJECT_DIR}Definition_Error_Model/
-WKD=${PROJECT_DIR}MODEL_CALCULATIONS/TEMPORAL_EVOLUTION_DETERMINISTIC/#
+WKD=${PROJECT_DIR}MODEL_CALCULATIONS/TEMPORAL_EVOLUTION_STOCHASTIC/#
+DET_DIR=${PROJECT_DIR}MODEL_CALCULATIONS/TEMPORAL_EVOLUTION_DETERMINISTIC/#
 C_NR=${PROJECT_DIR}Library/C_NumRecip/#############
 GSL_DA=${PROJECT_DIR}Library/GSL_RANDOM/##########
 HEAD.H =${PROJECT_DIR}Include/MODEL.h##############
@@ -50,7 +51,7 @@ TYPE_of_INDEX=_5p#   '_X2-Y_5p' /
 RANDOM_SEED=CURRENT_TIME_RDN_SEED####### 'CURRENT_TIME_RDN_SEED' / 'FILE_RND_SIDE'
 ##############################################################################################################
 ## C O M P I L A T I O N   O P T I O N S   C O N T R O L I N G   M O D E L   D E F I N I T I O N #############
-MODEL=SEI1I2AYR_AGE#  ######################################
+MODEL=SEI1I2AAdYR_AGE_MPOP#  ######################################
 ODE_MODEL=${MODEL}####################
 ################################################### (see rainTemperature.c) ##################################
 ## C O M P I L A T I O N   O P T I O N S   C O N T R O L I N G   N U M E R I C A L   I N T E G R A T I O N  ##
@@ -71,6 +72,10 @@ TYPE_NUMERICAL_INTEGRATION=GSL_RKF45#############################
 JACOBIAN=ODE# Options: 'ODE'
 EXTRA_INCLUDE_PATH+=-I${ODE_DEF}Include_${JACOBIAN}/#####
 ##############################################################################################################
+################################################### (see rainTemperature.c) ##################################
+## C O M P I L A T I O N   O P T I O N S   C O N T R O L I N G   N U M E R I C A L   I N T E G R A T I O N  ##
+STO_DIR_GENERAL=${PROJECT_DIR}Definition_Stochastic_Integration/#########
+STO_DIR=${STO_DIR_GENERAL}${ODE_MODEL}/#########
 ## D E F I N I T I O N   N A M E   E X E C U T B L E   C O D E ###############################################
 EXE=${ODE_MODEL}
 ##############################################################################################################
@@ -87,18 +92,19 @@ LIBS=-L/usr/lib -lX11
 PGPLOT_LIB=-L/usr/lib -lpgplot -L/usr/lib -lpng
 CPGPLOT_LIB=-L/usr/lib -lcpgplot -lpgplot -L/usr/lib -lpng
 ##############################################################################################################
-OBJECTS = main.o report.o argumentControl.o MODEL.o assert_right_model_definition.o          \
-	Parameter_Model.o Time_Control.o Parameter_Table.o definition_OutPut_Variables.o assignCodes_to_Model_Parameters.o assignLabel_to_Model_Parameters.o assignLabel_to_Model_Variables.o assignLabel_to_Output_Variables.o assignStructValue_to_VectorEntry.o assignSymbol_to_Model_Parameters.o assignSymbol_to_Model_Variables.o assignSymbol_to_Output_Variables.o assignVectorEntry_to_Structure.o Model_Variable_Initial_Condition_into_Vector_Entry.o Vector_Entry_into_Model_Variable_Initial_Condition.o fprintf_Model_Parameters.o fprintf_Output_Variables.o                                                        \
+OBJECTS = main.o report.o argumentControl.o MODEL.o MODEL_STO.o Community.o assert_right_model_definition.o          \
+	Parameter_Model.o Time_Control.o Parameter_Table.o definition_OutPut_Variables.o assignCodes_to_Model_Parameters.o assignLabel_to_Model_Parameters.o assignLabel_to_Model_Variables.o assignLabel_to_Output_Variables.o assignStructValue_to_VectorEntry.o assignSymbol_to_Model_Parameters.o assignSymbol_to_Model_Variables.o assignSymbol_to_Output_Variables.o assignVectorEntry_to_Structure.o Model_Variable_Initial_Condition_into_Vector_Entry.o Vector_Entry_into_Model_Variable_Initial_Condition.o fprintf_Model_Parameters.o fprintf_Output_Variables.o                                                                                                                                             \
 	Latex_assignLabel_to_Model_Parameters.o  Latex_Write_Parameter_Table.o               \
 	Parameter_Space.o Parameter_Space_Boundary_for_Trends${TYPE_of_BOUNDARY}.o  Initial_Condition_Boundary_Values.o  \
-	deterministic_time_dynamics.o numerical_Integration_Driver.o Initial_Conditions_Numerical_Integration.o Initial_Condition_from_Parameter_Table.o  Random_Initial_Condition.o ODE_sys_${ODE_MODEL}.o JAC_sys_MODEL.o JACOBIAN_Matrix_${ODE_MODEL}.o                                                \
+	deterministic_time_dynamics.o numerical_Integration_Driver.o Initial_Conditions_Numerical_Integration.o Initial_Condition_from_Parameter_Table.o  Random_Initial_Condition.o ODE_sys_${ODE_MODEL}.o JAC_sys_MODEL.o JACOBIAN_Matrix_${ODE_MODEL}.o                                            \
+	Stochastic_Time_Dynamics.o Initial_Conditions_Stochastic_Dynamics.o Patch_System_Initialization.o Advance_Current_Time.o Choose_Village.o Temporal_Dynamics.o Execute_One_Step.o Force_of_Infection_Sto.o                                                                                     \
 	Model_Variables_Code.o Total_Accumulated_Numbers.o Total_Population_Numbers.o Total_Disease_Prevalence.o Total_Disease_Infection.o Total_Population_Fractions.o In_Out_Migration_Functions.o \
 	stat.o                                                                               \
 	CPGPLOT___X_Y___Parameter_Table.o                                                    \
 	Time_Dependence_Apply.o Time_Dependence_Resolve.o Time_Dependence_Control.o Trend_Control.o # \ # index.Definition${TYPE_of_INDEX}.o Error_Function.o 
 # Fixed_Points_All.o Steady_State_x_Fraction.o x_y_Fixed_Points_Functions.o Feasibility_Condition.o Steady_State_y_Fraction.o intermediateRoot_x_Fraction.o Stable_Solution.o Stable_Solution_x.o Stable_Solution_y.o Generic_Root_Finder.o                                                         
 ### Example:
-RUN_ARGS =-sP 5 -n 6 -v0 7 -v1 8 -v2 9 -v3 10 -v4 11 -v5 12 -G0 3 -G1 2 -tn 5000 -t0 0.0 -t1 50.0 -t4 0 -xn 0 -xN 1000000 -H2 25000 -H13 25000 -G5 1 -G6 0.0 -G7 1.0
+RUN_ARGS =-y0 3 -HN 5 -n 4 -v0 8 -v1 9 -v2 10 -v3 12 -G0 2 -G1 2 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -xn 0 -xN 10000 -H2 4.0 -H1 0.3  -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 6000.0
 
 CC=gcc##
 FF=gfortran##
@@ -118,8 +124,14 @@ report.o: report.c ${HEAD.H}
 argumentControl.o: argumentControl.c ${HEAD.H}
 	${CC} -c argumentControl.c $(CXXFLAGS)
 
-MODEL.o: MODEL.c ${HEAD.H}
-	$(CC) -c MODEL.c $(CXXFLAGS)
+MODEL_STO.o: MODEL_STO.c ${HEAD.H}
+	$(CC) -c MODEL_STO.c $(CXXFLAGS)
+
+MODEL.o: ${DET_DIR}MODEL.c ${HEAD.H}
+	$(CC) -c ${DET_DIR}MODEL.c $(CXXFLAGS)
+
+Community.o: ${PROJECT_DIR}Community.c ${HEAD.H}
+	$(CC) -c ${PROJECT_DIR}Community.c $(CXXFLAGS)
 
 # Funcions controling main data structures (Parameter_Model, Time_Control,
 # Parameter_Table):
@@ -236,6 +248,32 @@ JACOBIAN_Matrix_${ODE_MODEL}.o: ${ODE_DEF}JACOBIAN_Matrix_${ODE_MODEL}.c ${HEAD.
 
 ODE_sys_${ODE_MODEL}.o: ${ODE_DEF}ODE_sys_${ODE_MODEL}.c ${HEAD.H}
 	$(CC) -c ${ODE_DEF}ODE_sys_${ODE_MODEL}.c $(CXXFLAGS)
+
+# Functions controling numerical integration of the ODE system
+# Stochastic_Time_Dynamics.o Initial_Conditions_Stochastic_Dynamics.o Patch_System_Initialization.o Advance_Current_Time.o Choose_Village.o Temporal_Dynamics.o Execute_One_Step.o Force_of_Infection_Sto.o
+Temporal_Dynamics.o: ${STO_DIR}Temporal_Dynamics.c ${HEAD.H}
+	${CC} -c ${STO_DIR}Temporal_Dynamics.c $(CXXFLAGS)
+
+Execute_One_Step.o: ${STO_DIR}Execute_One_Step.c ${HEAD.H}
+	${CC} -c ${STO_DIR}Execute_One_Step.c $(CXXFLAGS)
+
+Force_of_Infection_Sto.o: ${STO_DIR}Force_of_Infection_Sto.c ${HEAD.H}
+	${CC} -c ${STO_DIR}Force_of_Infection_Sto.c $(CXXFLAGS)
+
+Stochastic_Time_Dynamics.o: ${STO_DIR_GENERAL}Stochastic_Time_Dynamics.c ${HEAD.H}
+	${CC} -c ${STO_DIR_GENERAL}Stochastic_Time_Dynamics.c $(CXXFLAGS)
+
+Initial_Conditions_Stochastic_Dynamics.o: ${STO_DIR_GENERAL}Initial_Conditions_Stochastic_Dynamics.c ${HEAD.H}
+	${CC} -c ${STO_DIR_GENERAL}Initial_Conditions_Stochastic_Dynamics.c $(CXXFLAGS)
+
+Patch_System_Initialization.o: ${STO_DIR_GENERAL}Patch_System_Initialization.c ${HEAD.H}
+	${CC} -c ${STO_DIR_GENERAL}Patch_System_Initialization.c $(CXXFLAGS)
+
+Advance_Current_Time.o: ${STO_DIR_GENERAL}Advance_Current_Time.c ${HEAD.H}
+	${CC} -c ${STO_DIR_GENERAL}Advance_Current_Time.c $(CXXFLAGS)
+
+Choose_Village.o: ${STO_DIR_GENERAL}Choose_Village.c ${HEAD.H}
+	${CC} -c ${STO_DIR_GENERAL}Choose_Village.c $(CXXFLAGS)
 
 # Auxiliary functions to specify model ODE definition
 Model_Variables_Code.o: ${PROJECT_DIR}Model_Variables_Code.c ${HEAD.H}

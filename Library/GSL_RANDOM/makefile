@@ -7,7 +7,7 @@
 # The generated library is libDa_GSL_UTL.a 
 # ==========================================
 
-GSL_Stat_UTL=${HOME}/PROJECT_COVID19_MODELS/Library/GSL_RANDOM/
+GSL_Stat_UTL=${HOME}/PROJECT_AB-COVID19_MODEL/Library/GSL_RANDOM/
 EXTRA_INCLUDE_PATH= -I${GSL_Stat_UTL}
 CFLAGS=-g -fPIE -DHAVE_INLINE ${EXTRA_INCLUDE_PATH}
 ###CFLAGS= -Wall -O21 
