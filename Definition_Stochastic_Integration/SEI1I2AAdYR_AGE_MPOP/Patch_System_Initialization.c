@@ -4,7 +4,7 @@ void Patch_System_Initialization (Community ** PATCH, Parameter_Table * Table, d
 {
   int i,j; 
   Parameter_Model * P = Table->P;
-  int N               = P->No_of_PATCHES;
+  int N               = P->No_of_LOCAL_POPULATIONS;
 
   /* Populations are initialized in agreement with y_INI. If the system is multipatch all patches
      are initialized with the same populations */

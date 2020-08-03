@@ -22,7 +22,7 @@ int Advance_Current_Time( Parameter_Table * Table,
   double inter_event_time; 
   int Event, Patch;
   double Max_Probability     = Rate->max_Probability;     
-  int no_Patch               = Table->No_of_PATCHES;
+  int no_Patch               = Table->No_of_LOCAL_POPULATIONS;
   
   Parameter_Model * P        = Table->P; 
   Community ** Village       = Table->Patch_System;   

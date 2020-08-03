@@ -16,7 +16,7 @@ void Temporal_Dynamics_Update( Community ** My_Community,
   Community * pVil;
   double y, w, ss, ii, xx, ww, z0, z1, dz; 
   double a, b, c; 
-  int No_of_PATCHES;
+  int No_of_LOCAL_POPULATIONS;
   double Extinction_Rate;
   double Colonization_Rate;
   Parameter_Model * P = Table->P; 
@@ -28,7 +28,7 @@ void Temporal_Dynamics_Update( Community ** My_Community,
   X = Table->X; W = Table->W; 
   C = Table->C; K = Table->K;
   
-  No_of_PATCHES = P->No_of_PATCHES;
+  No_of_LOCAL_POPULATIONS = P->No_of_LOCAL_POPULATIONS;
   pVil          = My_Community[Patch];
   
   ss = (double)pVil->n[S];

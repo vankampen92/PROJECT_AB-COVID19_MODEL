@@ -8,7 +8,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
   int i,j,k;
   Community * P;
   int MODEL_STATE_VARIABLES;
-  int No_of_PATCHES;
+  int No_of_LOCAL_POPULATIONS;
   int No_of_EVENTS;
   double y; 
   Parameter_Model * pa  = Table->P;
@@ -22,16 +22,16 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
   
   /* P = My_Community[0]; P is a pointer to zero-th patch 
                              and will be incremented     */  
-  // for(i=0; i<No_of_PATCHES; i++, P++){
+  // for(i=0; i<No_of_LOCAL_POPULATIONS; i++, P++){
 
   Rate->max_Probability = 0.0;
   Rate->Total_Rate      = 0.0;
   
-  No_of_PATCHES         = pa->No_of_PATCHES;
+  No_of_LOCAL_POPULATIONS         = pa->No_of_LOCAL_POPULATIONS;
   MODEL_STATE_VARIABLES = pa->MODEL_STATE_VARIABLES;
   No_of_EVENTS          = pa->No_of_EVENTS;
   
-  for(i=0; i<No_of_PATCHES; i++){
+  for(i=0; i<No_of_LOCAL_POPULATIONS; i++){
     
     P = My_Community[i];
 

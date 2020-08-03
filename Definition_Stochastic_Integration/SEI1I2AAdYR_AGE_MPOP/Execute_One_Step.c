@@ -28,7 +28,7 @@ void Execute_One_Step(Community ** SP,
   double * Y = Table->Vector_Model_Variables;
   /* Hierarchic procedure to find the even to occur... */  
   /* The event occurs within the villages... */
-  if(P->No_of_PATCHES == 1) x = 0;
+  if(P->No_of_LOCAL_POPULATIONS == 1) x = 0;
   else                      x = Choose_Village(max_Probability, SP, P);
   
   pVil = SP[x];  /* x represents the chosen patch undegoing a change. */    
@@ -78,7 +78,7 @@ void Execute_One_Step(Community ** SP,
     }  
 
   /* Tracking total population of human and mosquitoes */
-  if(P->No_of_PATCHES == 1) {
+  if(P->No_of_LOCAL_POPULATIONS == 1) {
     Table->M_POPULATION = pVil->M_POPULATION;
     P->M_POPULATION     = pVil->M_POPULATION;
 

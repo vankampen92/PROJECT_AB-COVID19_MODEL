@@ -23,7 +23,7 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   /* BEGIN : -------------------------------------------------------------------------
    * Stochastic Community Set Up
    */
-  Community ** PATCH = (Community **)malloc( P->No_of_PATCHES * sizeof(Community *) );
+  Community ** PATCH = (Community **)malloc( P->No_of_LOCAL_POPULATIONS * sizeof(Community *) );
   C_O_M_M_U_N_I_T_Y___A_L_L_O_C_A_T_I_O_N ( PATCH, P ); 
   C_O_M_M_U_N_I_T_Y___I_N_I_T_I_A_L_I_Z_A_T_I_O_N (PATCH, P);
   /* The Parameter Model structure also keeps the three memmory addresses pointing to 
@@ -82,7 +82,7 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   free( Table->Vector_Model_Variables ); 
   free( Table->Vector_Model_Int_Variables );
   
-  C_O_M_M_U_N_I_T_Y___F_R_E_E (PATCH, P->No_of_PATCHES);
+  C_O_M_M_U_N_I_T_Y___F_R_E_E (PATCH, P->No_of_LOCAL_POPULATIONS);
   free ( P );
   
   return(0);

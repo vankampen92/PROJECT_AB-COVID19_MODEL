@@ -6,7 +6,7 @@ int Choose_Village(double max_Probability, Community ** Pop, Parameter_Model * P
   Community * P;
   int No_of_Villages;
 
-  No_of_Villages = Par->No_of_PATCHES;
+  No_of_Villages = Par->No_of_LOCAL_POPULATIONS;
 
   double * a = (double *)malloc(No_of_Villages * sizeof(double) );
   
