@@ -180,12 +180,11 @@ void Immigration_Preassure_on_Focal_Patch_Initialization( Community ** PATCH,
      These two functions have not been implemented yet.  
   */
   
-  int Q, i, a, j, k, n, n_Age; 
+  int Q, i, a, j, k, n; 
   double Imm_Rate;
   
   /* Q is the number of variables required to define the state of a single patch */
   Q     = P->TOTAL_No_of_DISEASE_STAGES * P->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
-  n_Age = P->TOTAL_No_of_AGE_CLASSES;
 
   for(i=0; i<P->No_of_LOCAL_POPULATIONS; i++) {
     for(j=0; j < Q; j++) {
@@ -204,7 +203,6 @@ void Immigration_Preassure_on_Focal_Patch_Initialization( Community ** PATCH,
     }
   }   
 }
-
 
 void Network_Structure_Inititialization (Community ** PATCH, int TYPE_of_NETWORK)
 {

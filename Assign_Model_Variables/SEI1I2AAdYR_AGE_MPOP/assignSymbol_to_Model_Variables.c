@@ -16,7 +16,7 @@ void AssignSymbol_to_Model_Variables(int m, char * Label, Parameter_Table * Tabl
 
   sprintf(Number, "%d", J);
   
-  pFile = strcat(Label, "P_");
+  pFile = strcat(Label, "P");
   pFile = strcat(Label, Number);
   pFile = strcat(Label, "[");
  

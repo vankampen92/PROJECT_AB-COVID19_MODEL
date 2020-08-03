@@ -21,3 +21,16 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 void Temporal_Dynamics_Update( Community ** My_Community,
 			       Parameter_Table * Table, Stochastic_Rate * Rate,
 			       int Type_of_Event, int Patch);
+
+void Local_Population_Decrease ( int n, Community * Patch );
+
+void Local_Population_Increase ( int n, Community * Patch );
+
+void Some_Other_Patch_Population_Decrease(int x, int a, int nS,
+					  Parameter_Table * Table);
+
+void Some_Other_Patch_Population_Increase(int x, int a, int nS,
+					  Parameter_Table * Table);
+
+void Positivity_Control( Parameter_Table * Table,
+			 int x, int jS, double * Y, int * J); 

@@ -3,11 +3,9 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <MODEL.h>
 
-double Imm_Preassure(Parameter_Table * Table, int nS, int a, int x);
-
 void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stochastic_Rate * Rate)
 {
-  int i,j,k;
+  int i,j,k, Q;
   Community * P;
   int MODEL_STATE_VARIABLES;
   int No_of_LOCAL_POPULATIONS;
@@ -16,6 +14,9 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
   double OutMigration_0, OutMigration_1, OutMigration_2, OutMigration_3;
   
   Parameter_Model * pa  = Table->P;
+  const double    *  Y  = Table->Vector_Model_Variables;
+
+  Q = Table->TOTAL_No_of_DISEASE_STAGES * Table->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
 
   /* Definition of the state vector numerical order, from 0 to K, of model variables */
   #include <Model_Variables_Code.Include.c>
@@ -31,9 +32,6 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
   No_of_EVENTS          = pa->TOTAL_No_of_EVENTS; /* Total No of Events 
 						     within each local population */  
-
-  Immigration_Preassure_on_Focal_Patch_Initialization( My_Community, pa ); 			  
-
   for(i=0; i<No_of_LOCAL_POPULATIONS; i++){
     
     P = My_Community[i];
@@ -62,7 +60,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[1] = OutMigration_0;     P->rToI[1]  = OutMigration_0 * (double)P->n[n0S];
 
     /* 2 (Age 0): In-Migration (S --> S+1) and some other patch loses one */ 
-    P->rate[2] = pa->Imm;            P->rToI[2]  = Imm_Preassure(Table, n0S, 0, i); 
+    P->rate[2] = pa->Imm;            P->rToI[2]  = In_Mu(Table, n0S +i*Q, 0, i, Y); 
 
 
     /* 3 (Age 0):  Exposed into Infectious (E --> E-1 and I1 --> I1 + 1)*/ 
@@ -72,7 +70,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[4] = OutMigration_0;     P->rToI[4]  = OutMigration_0 * (double)P->n[n0E];
 
     /* 5 (Age 0): In-Migration (E --> E+1) and some other patch loses one */ 
-    P->rate[5] = pa->Imm;            P->rToI[5]  = Imm_Preassure(Table, n0E, 0, i); 
+    P->rate[5] = pa->Imm;            P->rToI[5]  = In_Mu(Table, n0E +i*Q, 0, i, Y); 
 
 
     /* 6 (Age 0): Pre-Symptomatic into Infectious (I1 --> I1-1 and I2 --> I2 + 1)  */
@@ -87,7 +85,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[8] = OutMigration_0;      P->rToI[8] = OutMigration_0 * (double)P->n[n0I1];
 
     /* 9 (Age 0): In-Migration (I1 --> I1+1) and some other patch loses one */ 
-    P->rate[9] = pa->Imm;             P->rToI[9]  = Imm_Preassure(Table, n0I1, 0, i); 
+    P->rate[9] = pa->Imm;             P->rToI[9]  = In_Mu(Table, n0I1 +i*Q, 0, i, Y); 
 
 
     /* 10 (Age 0): Infectious I2 into Recovered (I2 -> I2-1 and R --> R+1) */
@@ -103,7 +101,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 13 (Age 0): In-Migration (I2 --> I1 + 1) and some other patch loses one */ 
     P->rate[13] = pa->Imm;
-    P->rToI[13]  = (1.0-pa->Eps_I)*Imm_Preassure(Table, n0I2, 0, i); 
+    P->rToI[13]  = (1.0-pa->Eps_I)*In_Mu(Table, n0I2 +i*Q, 0, i, Y); 
 
 
     /* 14 (Age 0): Assymptomatic into Recovered (A -> A-1 and R --> R + 1)    */
@@ -119,7 +117,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[16] = OutMigration_0;      P->rToI[16]  = OutMigration_0 * (double)P->n[n0A];
 
     /* 17 (Age 0): In-Migration (A --> A +1) and some other patch loses one */ 
-    P->rate[17] = pa->Imm;             P->rToI[17]  = Imm_Preassure(Table, n0A, 0, i); 
+    P->rate[17] = pa->Imm;             P->rToI[17]  = In_Mu(Table, n0A +i*Q, 0, i, Y); 
 
 
     /* 18 (Age 0): Detected Assymtomatic are recovered (Ad -> Ad-1 and R --> R + 1) */
@@ -132,7 +130,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 20 (Age 0): In-Migration (Ad --> Ad +1) and some other patch loses one */ 
     P->rate[20] = pa->Imm;
-    P->rToI[20]  = (1.0-pa->Eps_I)*Imm_Preassure(Table, n0Ad, 0, i); 
+    P->rToI[20]  = (1.0-pa->Eps_I)*In_Mu(Table, n0Ad +i*Q, 0, i, Y); 
 
     
     /* 21 (Age 0): Severe Infecious recover (Y --> Y-1 and R --> R + 1) */
@@ -147,7 +145,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[23] = OutMigration_0;      P->rToI[23] = OutMigration_0 * (double)P->n[n0R];
 
     /* 24 (Age 0): In-Migration (R --> R + 1) and some other patch loses one */ 
-    P->rate[24] = pa->Imm;             P->rToI[24] = Imm_Preassure(Table, n0R, 0, i); 
+    P->rate[24] = pa->Imm;             P->rToI[24] = In_Mu(Table, n0R +i*Q, 0, i, Y); 
 
   
     /* AGE 1 --------------------------------------------------------------------------*/
@@ -159,7 +157,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[26] = OutMigration_1;     P->rToI[26]  = OutMigration_1 * (double)P->n[n1S];
     
     /* 27 (Age 1): In-Migration (S --> S+1) and some other patch loses one */ 
-    P->rate[27] = pa->Imm;            P->rToI[27]  = Imm_Preassure(Table, n1S, 1, i); 
+    P->rate[27] = pa->Imm;            P->rToI[27]  = In_Mu(Table, n1S +i*Q, 1, i, Y); 
 
 
     /* 28 (Age 1):  Exposed into Infectious (E --> E-1 and I1 --> I1 + 1)*/ 
@@ -169,7 +167,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[29] = OutMigration_1;     P->rToI[29]  = OutMigration_1 * (double)P->n[n1E];
 
     /* 30 (Age 1): In-Migration (E --> E+1) and some other patch loses one */ 
-    P->rate[30] = pa->Imm;            P->rToI[30]  = Imm_Preassure(Table, n1E, 1, i); 
+    P->rate[30] = pa->Imm;            P->rToI[30]  = In_Mu(Table, n1E +i*Q, 1, i, Y); 
 
 
     /* 31 (Age 1): Pre-Symptomatic into Infectious (I1 --> I1-1 and I2 --> I2 + 1)  */
@@ -184,7 +182,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[33] = OutMigration_1;      P->rToI[33] = OutMigration_1 * (double)P->n[n1I1];
 
     /* 34 (Age 1): In-Migration (I1 --> I1+1) and some other patch loses one */ 
-    P->rate[34] = pa->Imm;            P->rToI[34]  = Imm_Preassure(Table, n1I1, 1, i); 
+    P->rate[34] = pa->Imm;            P->rToI[34]  = In_Mu(Table, n1I1 +i*Q, 1, i, Y); 
 
 
     /* 35 (Age 1): Infectious I2 into Recovered (I2 -> I2-1 and R --> R+1) */
@@ -200,7 +198,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 38 (Age 1): In-Migration (I2 --> I2 + 1) and some other patch loses one */ 
     P->rate[38] = pa->Imm;
-    P->rToI[38]  = (1.0-pa->Eps_I)*Imm_Preassure(Table, n1I2, 1, i); 
+    P->rToI[38]  = (1.0-pa->Eps_I)*In_Mu(Table, n1I2 +i*Q, 1, i, Y); 
 
 
     /* 39 (Age 1): Assymptomatic into Recovered (A -> A-1 and R --> R + 1)    */
@@ -216,7 +214,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[41] = OutMigration_1;      P->rToI[41]  = OutMigration_1 * (double)P->n[n1A];
 
     /* 42 (Age 1): In-Migration (A --> A +1) and some other patch loses one */ 
-    P->rate[42] = pa->Imm;             P->rToI[42]  = Imm_Preassure(Table, n1A, 1, i); 
+    P->rate[42] = pa->Imm;             P->rToI[42]  = In_Mu(Table, n1A +i*Q, 1, i, Y); 
 
 
     /* 43 (Age 1): Detected Assymtomatic are recovered (Ad -> Ad-1 and R --> R + 1) */
@@ -229,7 +227,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 45 (Age 1): In-Migration (Ad --> Ad +1) and some other patch loses one */ 
     P->rate[45] = pa->Imm;
-    P->rToI[45] = (1.0-pa->Eps_I)*Imm_Preassure(Table, n1Ad, 1, i); 
+    P->rToI[45] = (1.0-pa->Eps_I)*In_Mu(Table, n1Ad +i*Q, 1, i, Y); 
 
     /* 46 (Age 1): Severe Infecious recover (Y --> Y-1 and R --> R + 1) */
     /*                                                 and AR --> AR + 1   */              
@@ -244,7 +242,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[48] = OutMigration_1;      P->rToI[48] = OutMigration_1 * (double)P->n[n1R];
 
     /* 49 (Age 1): In-Migration (R --> R + 1) and some other patch loses one */ 
-    P->rate[49] = pa->Imm;             P->rToI[49]  = Imm_Preassure(Table, n1R, 1, i); 
+    P->rate[49] = pa->Imm;             P->rToI[49]  = In_Mu(Table, n1R +i*Q, 1, i, Y); 
 
     
     /* AGE 2 --------------------------------------------------------------------------*/
@@ -256,7 +254,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[51] = OutMigration_2;     P->rToI[51]  = OutMigration_2 * (double)P->n[n2S];
     
     /* 52 (Age 2): In-Migration (S --> S+1) and some other patch loses one */ 
-    P->rate[52] = pa->Imm;            P->rToI[52]  = Imm_Preassure(Table, n2S, 2, i); 
+    P->rate[52] = pa->Imm;            P->rToI[52]  = In_Mu(Table, n2S +i*Q, 2, i, Y); 
 
 
     /* 53 (Age 2):  Exposed into Infectious (E --> E-1 and I1 --> I1 + 1)*/ 
@@ -266,7 +264,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[54] = OutMigration_2;     P->rToI[54]  = OutMigration_2 * (double)P->n[n2E];
 
     /* 55 (Age 2): In-Migration (E --> E+1) and some other patch loses one */ 
-    P->rate[55] = pa->Imm;            P->rToI[55]  = Imm_Preassure(Table, n2E, 2, i); 
+    P->rate[55] = pa->Imm;            P->rToI[55]  = In_Mu(Table, n2E +i*Q, 2, i, Y); 
 
 
     /* 56 (Age 2): Pre-Symptomatic into Infectious (I1 --> I1-1 and I2 --> I2 + 1)  */
@@ -281,7 +279,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[58] = OutMigration_2;      P->rToI[58] = OutMigration_2 * (double)P->n[n2I1];
 
     /* 59 (Age 2): In-Migration (I1 --> I1+1) and some other patch loses one */ 
-    P->rate[59] = pa->Imm;            P->rToI[59]  = Imm_Preassure(Table, n2I1, 2, i); 
+    P->rate[59] = pa->Imm;            P->rToI[59]  = In_Mu(Table, n2I1 +i*Q, 2, i, Y); 
 
 
     /* 60 (Age 2): Infectious I2 into Recovered (I2 -> I2-1 and R --> R+1) */
@@ -297,7 +295,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 63 (Age 2): In-Migration (I2 --> I1 + 1) and some other patch loses one */ 
     P->rate[63] = pa->Imm;
-    P->rToI[63] = (1.0-pa->Eps_I)*Imm_Preassure(Table, n2I2, 2, i); 
+    P->rToI[63] = (1.0-pa->Eps_I)*In_Mu(Table, n2I2 +i*Q, 2, i, Y); 
 
 
     /* 64 (Age 2): Assymptomatic into Recovered (A -> A-1 and R --> R + 1)    */
@@ -313,7 +311,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[66] = OutMigration_2;      P->rToI[66]  = OutMigration_2 * (double)P->n[n2A];
 
     /* 67 (Age 2): In-Migration (A --> A +1) and some other patch loses one */ 
-    P->rate[67] = pa->Imm;              P->rToI[67] = Imm_Preassure(Table, n2A, 2, i); 
+    P->rate[67] = pa->Imm;              P->rToI[67] = In_Mu(Table, n2A +i*Q, 2, i, Y); 
 
 
     /* 68 (Age 2): Detected Assymtomatic are recovered (Ad -> Ad-1 and R --> R + 1) */
@@ -326,7 +324,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 70 (Age 2): In-Migration (Ad --> Ad +1) and some other patch loses one */ 
     P->rate[70] = pa->Imm;
-    P->rToI[70] = (1.0-pa->Eps_I)*Imm_Preassure(Table, n2Ad, 2, i); 
+    P->rToI[70] = (1.0-pa->Eps_I)*In_Mu(Table, n2Ad +i*Q, 2, i, Y); 
 
     
     /* 71 (Age 2): Severe Infecious recover (Y --> Y-1 and R --> R + 1) */
@@ -342,7 +340,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[73] = OutMigration_2;      P->rToI[73] = OutMigration_2 * (double)P->n[n2R];
 
     /* 74 (Age 2): In-Migration (R --> R + 1) and some other patch loses one */ 
-    P->rate[74] = pa->Imm;             P->rToI[74]  = Imm_Preassure(Table, n2R, 2, i); 
+    P->rate[74] = pa->Imm;             P->rToI[74]  = In_Mu(Table, n2R +i*Q, 2, i, Y); 
 
     
     /* AGE 3 --------------------------------------------------------------------------*/
@@ -354,7 +352,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[76] = OutMigration_3;     P->rToI[76]  = OutMigration_3 * (double)P->n[n3S];
     
     /* 77 (Age 3): In-Migration (S --> S+1) and some other patch loses one */ 
-    P->rate[77] = pa->Imm;            P->rToI[77]  = Imm_Preassure(Table, n3S, 3, i); 
+    P->rate[77] = pa->Imm;            P->rToI[77]  = In_Mu(Table, n3S +i*Q, 3, i, Y); 
 
 
     /* 78 (Age 3):  Exposed into Infectious (E --> E-1 and I1 --> I1 + 1)*/ 
@@ -364,7 +362,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[79] = OutMigration_3;     P->rToI[79]  = OutMigration_3 * (double)P->n[n3E];
 
     /* 80 (Age 3): In-Migration (E --> E+1) and some other patch loses one */ 
-    P->rate[80] = pa->Imm;            P->rToI[80]  = Imm_Preassure(Table, n3E, 3, i); 
+    P->rate[80] = pa->Imm;            P->rToI[80]  = In_Mu(Table, n3E +i*Q, 3, i, Y); 
 
 
     /* 81 (Age 3): Pre-Symptomatic into Infectious (I1 --> I1-1 and I2 --> I2 + 1)  */
@@ -379,7 +377,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[83] = OutMigration_3;      P->rToI[83] = OutMigration_3 * (double)P->n[n3I1];
 
     /* 84 (Age 3): In-Migration (I1 --> I1+1) and some other patch loses one */ 
-    P->rate[84] = pa->Imm;            P->rToI[84]  = Imm_Preassure(Table, n3I1, 3, i); 
+    P->rate[84] = pa->Imm;            P->rToI[84]  = In_Mu(Table, n3I1 +i*Q, 3, i, Y); 
 
 
     /* 85 (Age 3): Infectious I2 into Recovered (I2 -> I2-1 and R --> R+1) */
@@ -395,7 +393,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 88 (Age 3): In-Migration (I2 --> I2 + 1) and some other patch loses one */ 
     P->rate[88] = pa->Imm;
-    P->rToI[88]  = (1.0-pa->Eps_I)*Imm_Preassure(Table, n3I2, 3, i); 
+    P->rToI[88]  = (1.0-pa->Eps_I)*In_Mu(Table, n3I2 +i*Q, 3, i, Y); 
 
 
     /* 89 (Age 3): Assymptomatic into Recovered (A -> A-1 and R --> R + 1)    */
@@ -411,7 +409,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[91] = OutMigration_3;      P->rToI[91]  = OutMigration_3 * (double)P->n[n3A];
 
     /* 92 (Age 3): In-Migration (A --> A +1) and some other patch loses one */ 
-    P->rate[92] = pa->Imm;             P->rToI[92] = Imm_Preassure(Table, n3A, 3, i); 
+    P->rate[92] = pa->Imm;             P->rToI[92] = In_Mu(Table, n3A +i*Q, 3, i, Y); 
 
 
     /* 93 (Age 3): Detected Assymtomatic are recovered (Ad -> Ad-1 and R --> R + 1) */
@@ -424,7 +422,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
 
     /* 95 (Age 3): In-Migration (Ad --> Ad +1) and some other patch loses one */ 
     P->rate[95] = pa->Imm;
-    P->rToI[95] = (1.0-pa->Eps_I)*Imm_Preassure(Table, n3Ad, 3, i); 
+    P->rToI[95] = (1.0-pa->Eps_I)*In_Mu(Table, n3Ad +i*Q, 3, i, Y); 
 
     
     /* 96 (Age 3): Severe Infecious recover (Y --> Y-1 and R --> R + 1) */
@@ -440,7 +438,7 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
     P->rate[98] = OutMigration_3;      P->rToI[98] = OutMigration_3 * (double)P->n[n3R];
 
     /* 99 (Age 3): In-Migration (R --> R + 1) and some other patch loses one */ 
-    P->rate[99] = pa->Imm;             P->rToI[99] = Imm_Preassure(Table, n3R, 3, i); 
+    P->rate[99] = pa->Imm;             P->rToI[99] = In_Mu(Table, n3R +i*Q, 3, i, Y); 
     
      
     P->ratePatch = 0; 
@@ -459,20 +457,4 @@ void Temporal_Dynamics(Community ** My_Community, Parameter_Table * Table, Stoch
       printf("\n");
       if( Rate->Total_Rate < 0.0 ) exit(0);
   }
-}
-
-double Imm_Preassure(Parameter_Table * Table, int nS, int a, int x)
-{
-  /* This is the probability rate of some immigration occuring into focal patch x
-     coming from its patch neighborhood. 
-  */
-  double Total_Rate;
-  int k;
-  
-  Community ** Patch = Table->Patch_System;
-  
-  k = nS%Table->TOTAL_No_of_DISEASE_STAGES; 
-  Total_Rate = Patch[x]->Total_Imm_Rate_Per_Disease_Status[a][k]; 
-  
-  return(Total_Rate);
 }
