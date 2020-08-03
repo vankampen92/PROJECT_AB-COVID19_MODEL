@@ -114,7 +114,19 @@ void Model_Variables_Code_into_Parameter_Table (Parameter_Table * P)
      P->TOTAL_No_of_EVENTS         = 100;  /* SEI1I2AAdYR_AGE: Total Number of Events */
      P->No_of_EVENTS               = 25;   /* SEI1I2AAdYR_AGE: Total Number of Events 
 					      within an age class */
-	P->n0S =   0; /* (0: Children) */
+     P->nS =   0; /* (: Children) */
+     P->nE =   1; 
+     P->nI1 =  2; 
+     P->nI2 =  3; 
+     P->nA =   4;
+     P->nAd =  5;
+     P->nY =   6;
+     P->nR =   7;
+     P->aI =   8;  /* Accumulated Number of Detected Infections (strong + severe symptoms) */
+     P->aR =   9;  /* Accumulated Number of Detected Recoveries                          */ 
+     P->aD =  10;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+  
+        P->n0S =   0; /* (0: Children) */
         P->n0E =   1; 
         P->n0I1 =  2; 
         P->n0I2 =  3; 
@@ -189,7 +201,19 @@ void Model_Variables_Code_into_Parameter_Table (Parameter_Table * P)
 					     within every patch */
      P->No_of_EVENTS               = 25;  /* SEI1I2AAdYR_AGE_MPOP: Total Number of Events 
 					     within a patch and an age class */
-	P->n0S =   0; /* (0: Children) */
+     P->nS =   0; /* (: Children) */
+     P->nE =   1; 
+     P->nI1 =  2; 
+     P->nI2 =  3; 
+     P->nA =   4;
+     P->nAd =  5;
+     P->nY =   6;
+     P->nR =   7;
+     P->aI =   8;  /* Accumulated Number of Detected Infections (strong + severe symptoms) */
+     P->aR =   9;  /* Accumulated Number of Detected Recoveries                          */ 
+     P->aD =  10;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+  
+        P->n0S =   0; /* (0: Children) */
         P->n0E =   1; 
         P->n0I1 =  2; 
         P->n0I2 =  3; 

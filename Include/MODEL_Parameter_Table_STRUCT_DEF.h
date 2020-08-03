@@ -76,7 +76,7 @@ typedef struct Parameter_Tableinfo
   char ** Model_Variable_Name;
   char ** Model_Variable_Symbol;
 
-  int nS, nE, nI1, nI2, nA, nY, nR;
+  int nS, nE, nI1, nI2, nA, nAd, nY, nR;
   int aI, aR, aD;
 
   int n0S, n0E, n0I1, n0I2, n0A, n0Ad, n0Y, n0R;

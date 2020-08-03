@@ -68,15 +68,8 @@ int Advance_Current_Time( Parameter_Table * Table,
 #if defined VERBOSE
   printf(" Total population across the system at current time (t = %g)\n", 
      (*Time_Current) );
-  for(k = 0; k<Table->MODEL_STATE_VARIABLES; k++) {
-    printf(" J[%s] = %d\t", Table->Model_Variable_Symbol[k], J[k]);
-    printf(" Y[%s] = %g\t", Table->Model_Variable_Symbol[k], Y[k]);
-  }
-  printf("\n"); 
-  printf(" Total population on local population 0 (checking pointers):\n");
-  for(k = 0; k<Table->MODEL_STATE_VARIABLES; k++) 
-    printf(" %s = %d\t", Table->Model_Variable_Symbol[k], Village[0]->n[k]);
-  printf("\n\n"); 
+  
+  Print_Meta_Community_Patch_System (Table); 
 #endif
   
   return(0);

@@ -30,7 +30,6 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
    *   the Patch System, the Time Control structure, and the CPG structure to plot   
    */
   Table->Patch_System = PATCH;
-  P->Time             = Table->T;
   P->CPG              = Table->CPG_STO; 
   /* END ----------------------------------------------------------------------------
    */

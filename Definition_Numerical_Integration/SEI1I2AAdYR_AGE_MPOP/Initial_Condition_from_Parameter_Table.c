@@ -317,8 +317,8 @@ void Initial_Condition_from_Value_into_Parameter_Table (Parameter_Table * Table,
      Table->a0R___0[J]  = 0.0;
      Table->a0D___0[J]  = 0.0;
      
-     Table->n1S___0[J]  = Table->N_1[J];
-     Table->n1E___0[J]  = 0.0;
+     Table->n1S___0[J]  = Table->N_1[J] - Value;
+     Table->n1E___0[J]  = Value;
      Table->n1I1___0[J] = 0.0;
      Table->n1I2___0[J] = 0.0;
      Table->n1A___0[J]  = 0.0; 
@@ -329,8 +329,8 @@ void Initial_Condition_from_Value_into_Parameter_Table (Parameter_Table * Table,
      Table->a1R___0[J]  = 0.0;
      Table->a1D___0[J]  = 0.0;
      
-     Table->n2S___0[J]  = Table->N_2[J];
-     Table->n2E___0[J]  = 0.0;
+     Table->n2S___0[J]  = Table->N_2[J] - Value;
+     Table->n2E___0[J]  = Value;
      Table->n2I1___0[J] = 0.0;
      Table->n2I2___0[J] = 0.0;
      Table->n2A___0[J]  = 0.0; 
@@ -341,8 +341,8 @@ void Initial_Condition_from_Value_into_Parameter_Table (Parameter_Table * Table,
      Table->a2R___0[J]  = 0.0;
      Table->a2D___0[J]  = 0.0;
      
-     Table->n3S___0[J]  = Table->N_3[J];
-     Table->n3E___0[J]  = 0.0;
+     Table->n3S___0[J]  = Table->N_3[J] - Value;
+     Table->n3E___0[J]  = Value;
      Table->n3I1___0[J] = 0.0;
      Table->n3I2___0[J] = 0.0;
      Table->n3A___0[J]  = 0.0; 

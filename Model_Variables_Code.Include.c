@@ -40,7 +40,7 @@ int L2I;   /* Last Infected Class  */
 int L3I0;  /* First Infected Class (3: Seniors) */
 int L3I;   /* Last Infected Class  */
 
-nS = Table->nS;   nE = Table->nE;   nI1 = Table->nI1;   nI2 = Table->nI2;   nA = Table->nA;   nY = Table->nY;  nR = Table->nR;
+nS = Table->nS;   nE = Table->nE;   nI1 = Table->nI1;   nI2 = Table->nI2;   nA = Table->nA;  nAd = Table->nAd;  nY = Table->nY;  nR = Table->nR;
 aI = Table->aI;   aR = Table->aR;   aD  = Table->aD;
 
 

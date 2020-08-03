@@ -26,17 +26,17 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
   P            = Table->P;
   PATCH        = Table->Patch_System;
 
-  Time         = P->Time;
-  Time_Initial = P->Time->Time_0;
-  Time_Final   = P->Time->Time_1;
-  TIMES        = P->Time->I_Time;
-  Rate         = Time->Rate;
+  Time         = Table->T;
+  Time_Initial = Time->Time_0;
+  Time_Final   = Time->T->Time_1;
+  TIMES        = Time->T->I_Time;
+  Rate         = Table->T->Rate;
 
   /* Each stochastic realization will be saved in a different file */
   file[0]='\0';  fitxer(file, "re_", i, ".dat"); FP = fopen(file, "w");
 
   /* BEGIN : Initial Conditions -------------------------------------------------------------*/
-
+  
   // printf(" Before  Initial_Conditions_Stochastic_Dynamics(...)\n");
   Initial_Conditions_Stochastic_Dynamics( Table, Table->Vector_Model_Variables );
   // printf(" After Initial_Conditions_Numerical_Integration(...). Initial Conditions:  ");
@@ -84,7 +84,9 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
     new = 0;
     while( Time_Current < Time->Time_Vector[j] && FROZEN_SYSTEM == 0 )
       {
+	
 	FROZEN_SYSTEM = Advance_Current_Time( Table, Rate, &Time_Current, &new );
+
       }
     /*     E N D
      * -------------------------------------------------------------------
@@ -130,8 +132,6 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
       /* BEGIN: Grafical Representation per SUCCESSFUL time step */
       C_P_G___S_U_B___P_L_O_T_T_I_N_G___n___P_L_O_T_S( Table->CPG->DEVICE_NUMBER,
 						       1+i, j_Good, Table );
-      // C_P_G___S_U_B___P_L_O_T_T_I_N_G___n___P_L_O_T_S( CPG->DEVIVE_NUMBER,
-      //                        			  i, j_Good, Table );
       /*   END: Grafical Representation per time step */
 #endif
 
@@ -141,15 +141,6 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
 	fprintf(FP,"\t%g", Table->Vector_Output_Variables[k]);
       }
       fprintf(FP,"\n");
-
-#if defined VERBOSE
-      printf("Current Time: %g\t Time(%d) = %g\t Time(%d) = %g\t I[0]=%d\tI[1]=%d\n",
-	     Time_Current, j-1, Time_Initial, j, Time_Final, PATCH[0]->I[0], PATCH[0]->I[1]);
-      for(k=0; k < Table->SUB_OUTPUT_VARIABLES; k++){
-	printf("\t%g", Table->Vector_Output_Variables[k]);
-      }
-      printf("\n");
-#endif
       /*   END: Writing costumized file        */
     }
   }/* go further to the next time           */

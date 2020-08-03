@@ -9,53 +9,24 @@ gsl_rng * r; /* Global generator defined in main.c */
 
 /* This code calculates ODE model temporal evolution for a range of sexual-transmitted AIDS-HIV models
 
-   Compilation:
+   Compilation (see makefile variable MODEL):
 
-   . ~$ make
+   . ~$ make 
 
    Exectution:
-   Important Notice: X and Y ranges are given as input parameters. If they are not conveniently 
-   chosen, you may not see the plot, because the plot functions never plot out of ranges values.  
-   
-   Execution example just one plot (No of infectious bites per human per year, EIR):
-
-   . ~$ ./SI-XW -S0 4 -n 1 -v0 12 -tn 60 -t0 0.0 -t1 150.0 -t4 0 -tR 10 -xn 0 -H3 50000 -M4 2.0 -G0 1 -G1 1 -G2 1 -G3 0.0 -G4 150.0 -G5 1 -G6 0.0 -G7 150.0
-
-   Execution example plotting the full list of model state variables (First example showing demographic stochasticity is not relevant at all. Second example showing its relevance!) 
-   
-   . ~$ ./SI-XW -S0 4 -n 4 -v0 0 -v1 1 -v2 2 -v3 3 -tn 100 -t0 0.0 -t1 100.0 -t4 0 -tR 10 -xn 0 -H3 50000 -M4 2.0 -G0 2 -G1 2 -G2 1 -G3 0.0 -G4 100.0 -G5 1 -G6 0.0 -G7 100000.0
-
-   . ~$ ./SI-XW -S0 4 -n 4 -v0 0 -v1 1 -v2 2 -v3 3 -tn 500 -t0 0.0 -t1 2000.0 -t4 0 -tR 10 -xn 0 -H3 25000 -M4 0.4 -M0 0.15 -M3 0.2 -G0 2 -G1 2 -G2 1 -G3 0.0 -G4 2000.0 -G5 1 -G6 0.0 -G7 1000.0
-   
-   Execution example plotting only infectious humans and mosquitoes: 
-
-   . ~$ ./SI-XW -S0 4 -n 2 -v0 1 -v2 3 -tn 100 -t0 0.0 -t1 100.0 -t4 0 -tR 10 -xn 0 -H3 50000 -M4 2.0 -G0 1 -G1 2 -G2 1 -G3 0.0 -G4 100.0 -G5 1 -G6 0.0 -G7 100000. (litte stochaticity)
-
-   . ~$ ./SI-XW -S0 4 -n 2 -v0 1 -v1 3 -tn 100 -t0 0.0 -t1 10000.0 -t4 0 -tR 10 -xn 0 -H3 250000 -M4 0.4 -M0 0.15 -M3 0.2 -G0 1 -G1 2 -G2 1 -G3 0.0 -G4 10000.0 -G5 1 -G6 0.0 -G7 65000.0 (a lot of stochasticity)
    
    Execution example plotting the temporal evolution of the full list of output variables (non-model state variables): 
    
-   . ~$ ./SI-XW -S0 4 -n 9 -v0 4 -v1 5 -v2 6 -v3 7 -v4 8 -v5 9 -v6 10 -v7 11 -v8 12 -G0 3 -G1 3 -tn 100 -t0 0.0 -t1 5000.0 -t4 0 -tR 10 -xn 0 -H3 25000 -M4 0.4 -M0 0.15 -M3 0.2 -G2 1 -G3 0.0 -G4 5000.0 -G5 1 -G6 0.0 -G7 1.5  (a lot of stochasticity)
+   . ~$ ../SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 5 -n 4 -v0 8 -v1 9 -v2 10 -v3 12 -G0 2 -G1 2 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -xn 0 -xN 10000 -H2 4.0 -H1 0.3  -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 6000.0 
 
-   . ~$ ./SI-XW -S0 4 -n 9 -v0 4 -v1 5 -v2 6 -v3 7 -v4 8 -v5 9 -v6 10 -v7 11 -v8 12 -G0 3 -G1 3 -tn 100 -t0 0.0 -t1 300.0 -t4 0 -tR 10 -xn 0 -H3 50000 -M4 2.0 -G2 1 -G3 0.0 -G4 300.0 -G5 1 -G6 0.0 -G7 10.0 (litte stochaticity)
-
-   -S0 SUB_MODEL_PARAMETERS to define a subparameter space to explore  
    -xn TYPE of INITIAL CONDITION (0 from default values or Input Args; 
                                   1 at Random; 
                                   2 from fixed Point) 
    -xH INITIAL TOTAL POPULATION SIZE (controled also by -H3) 
-   -t4 TYPE of TIME DEPENDENCE (0, no parameter time dependence). If the TYPE of TIME DEPENDENCE input argument is greater than 0, different types of parameter time dependence are at play. See, for instance, ./Definition_Numerical_Integration/deterministic_time_dynamics.c
+   -t4 TYPE of TIME DEPENDENCE (0, no parameter time dependence). 
 
    See denition_OutPut_Variables.c (Genuine/Derived Output Variable): 
-    -v0 0+4   Fraction of Infectious Humans (Disease Prevalence)
-    -v1 1+4   Fraction of Infectious Mosquitoes
-    -v2 2+4   Total Human Population
-    -v3 3+4   Total Mosquito Population
-    -v4 4+4   R_0
-    -v5 5+4   Mosquito Vectorial Capacity
-    -v6 6+4   Total Mosquitoes Density per Human
-    -v7 7+4   Infectious Mosquitoes Density per Human
-    -v8 8+4   Entomological Inoculation Rate (EIR). 
+    -v0  
 */
 
 int main(int argc, char **argv)
@@ -72,6 +43,28 @@ int main(int argc, char **argv)
   /* Command line arguments */
   if(argc>1) ArgumentControl(argc,argv);
 
+  /* Just to try an homogeneous contact matrix */ 
+  Beta_00 = Beta;
+  Beta_01 = Beta;
+  Beta_02 = Beta;
+  Beta_03 = Beta;
+  
+  Beta_10 = Beta;
+  Beta_11 = Beta;
+  Beta_12 = Beta;
+  Beta_13 = Beta;
+  
+  Beta_20 = Beta;
+  Beta_21 = Beta;
+  Beta_22 = Beta;
+  Beta_23 = Beta;
+  
+  Beta_30 = Beta;
+  Beta_31 = Beta;
+  Beta_32 = Beta;
+  Beta_33 = Beta;
+  
+
   INITIAL_TOTAL_POPULATION    = H;                            
   INITIAL_MOSQUITO_POPULATION = m * INITIAL_TOTAL_POPULATION; 
   /* The two previous code lines overwrite any choice for -xH and -xM (initial values */ 
@@ -86,24 +79,35 @@ int main(int argc, char **argv)
   P_A_R_A_M_E_T_E_R___S_P_A_C_E___U_P_L_O_A_D( &Space, &Table, A_n, A_d);
   printf(" Parameter_Space structure has been correctly allocated and initiated\n");
 
-  /* It the dynamics is temperature/rainful driven, the corresponding
-     data structure should be also allocated and initiated here
-     (at least, after initiating Parameter_Table structure)
-  *//* */
-  printf(" Time_Control structure will be allocated: \n");
-  printf(" %d output variables of length %d points will be allocated\n",
-	 SUB_OUTPUT_VARIABLES, I_Time);
-  T_I_M_E___C_O_N_T_R_O_L___A_L_L_O_C( &Time, &Table, I_Time);
-  T_I_M_E___C_O_N_T_R_O_L___U_P_L_O_A_D( &Time, &Table, I_Time);
-  printf(" Time_Control structure has been correctly allocated and initiated\n");
-  
-  printf(" Trend_Control structure will be allocated: \n");
-  Tr = (Trend_Control *)malloc( 1 * sizeof(Trend_Control) );
-  T_R_E_N_D___C_O_N_T_R_O_L___U_P_L_O_A_D( Tr, &Table);
-  int Input_Parameter = Tr->Tr_Input_Parameter;
-  S_E_T_U_P___T_R_E_N_D___F_R_E_E___T_R_I_A_N_G_L_E (Tr, &Time, Input_Parameter );
-  printf(" Trend_Control structure has been correctly allocated and initiated\n");
+  if (TYPE_of_TIME_DEPENDENCE == 0) {
+    printf(" Time_Control structure will be allocated: \n");
+    printf(" %d output variables of length %d points will be allocated\n",
+	   SUB_OUTPUT_VARIABLES, I_Time);
+    T_I_M_E___C_O_N_T_R_O_L___A_L_L_O_C( &Time, &Table, I_Time);
+    T_I_M_E___C_O_N_T_R_O_L___U_P_L_O_A_D( &Time, &Table, I_Time);
+    printf(" Time_Control structure has been correctly allocated and set up\n");
+  }
+  else {
+    #include <include.Time_Dependence_Control.default.aux.c>
+    printf(" Time_Dependence_Control and Time_Control structures will be allocated: \n");
+    printf(" %d output variables of length %d points will be allocated\n",
+    SUB_OUTPUT_VARIABLES, I_Time);
+    Time_Dependence_Control_Alloc(&Time, &Time_Dependence, &Table,
+				  I_Time, TIME_DEPENDENT_PARAMETERS, No_of_COVARIATES);
 
+    int No_of_EMPIRICAL_TIMES = 17;
+    // Number of columns in the data files of time-dependent parameters
+    Time_Dependence_Control_Upload(&Time, &Time_Dependence, &Table,
+				   I_Time, No_of_EMPIRICAL_TIMES,
+				   TIME_DEPENDENT_PARAMETERS, TYPE_of_TIME_DEPENDENCE,
+				   TYPE_0_PARAMETERS, TYPE_1_PARAMETERS, TYPE_2_PARAMETERS,
+				   No_of_COVARIATES,
+				   dependent_parameter, forcing_pattern,
+				   "File_of_Covariates.dat", Name_of_FILE[0] );
+    printf(" Both Time_Control and Time_Dependence_Control structures have been\n");
+    printf(" correctly allocated and set up\n");
+  }
+  
 #if defined CPGPLOT_REPRESENTATION
   Table.CPG = A_C_T_I_V_A_T_E___C_P_G_P_L_O_T ( SUB_OUTPUT_VARIABLES, I_Time, 0, CPG_DRIVER_NAME);
   Table.CPG_STO = A_C_T_I_V_A_T_E___C_P_G_P_L_O_T (SUB_OUTPUT_VARIABLES, I_Time, 0, CPG_DRIVER_NAME);
@@ -126,12 +130,15 @@ int main(int argc, char **argv)
   printf("\n");//Press_Key();
   /*   END: Checking Random Number Generator Setup */
 #endif
+
+  double Initial_Exposed_Population = 1.0; 
+  Initial_Condition_from_Value_into_Parameter_Table (&Table, Initial_Exposed_Population); 
   
   /* Deterministic Time Dynamics */
   M_O_D_E_L( &Table );
 
   /* Stochastic Time Dynamics: A number of stochastic realizations     */
-  values_Parameter_Model(&Table); /* Back to input argument parameters */ 
+  Parameter_Values_into_Parameter_Table(&Table);
   M_O_D_E_L___S_T_O( &Table );
   
   /* BEGIN : -------------------------------------------------------------------------

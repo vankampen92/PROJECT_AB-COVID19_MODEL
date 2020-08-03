@@ -328,11 +328,7 @@ void Parameter_Table_Index_Update(int * Index, int N, Parameter_Table * P)
 void Parameter_Values_into_Parameter_Table(Parameter_Table * P)
 {
   int i_POP; 
-  /* P->D_Sigma  = D_Sigma;  /\* Parameter introducing time-dependence in Sigma_0 and Sigma_1 *\/ */
-  /* P->Sigmoidal_A0 = Sigmoidal_A0; /\* Parameter introducing time-dependence in Sigma_0 and Sigma_1 *\/  */
-  /* P->Sigmoidal_L0 = Sigmoidal_L0; /\* Parameter introducing time-dependence in Sigma_0 and Sigma_1 *\/ */
-  /* P->Sigmoidal_T0 = Sigmoidal_T0; /\* Parameter introducing time-dependence in Sigma_0 and Sigma_1 *\/  */
-
+  
   /* Pointer assigments for the arrays containing the population of each class in every patch */
   P->N_0 = N_0;
   P->N_1 = N_1;
@@ -554,6 +550,6 @@ void Parameter_Values_into_Parameter_Table(Parameter_Table * P)
   /* Definition of type of network */
   P->No_of_NEIGHBORS    = No_of_LOCAL_POPULATIONS-1;
   P->TYPE_of_NETWORK    = 0;   /* Fully Connected Network 
-				  More network structure under construction 
+				  More network structures under construction 
 			       */
 }
