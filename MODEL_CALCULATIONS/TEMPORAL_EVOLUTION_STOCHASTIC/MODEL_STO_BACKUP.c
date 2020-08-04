@@ -10,30 +10,9 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   Time_Control * Time = Table->T;
   
   Parameter_Model * P = (Parameter_Model *)malloc( 1 * sizeof(Parameter_Model) );
-  P_A_R_A_M_E_T_E_R___I_N_I_T_I_A_L_I_Z_A_T_I_O_N (Table, P);
-  Table->P  = P;
-  printf(" Parameter_Model structure has been correctly allocated and initiated\n");
   
   I_Time    = Time->I_Time;
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */  
-  int MODEL_STATE_VARIABLES = Table->MODEL_STATE_VARIABLES;
-  Table->Vector_Model_Variables = (double *)calloc( MODEL_STATE_VARIABLES, sizeof(double) );
-  Table->Vector_Model_Int_Variables = (int *)calloc( MODEL_STATE_VARIABLES, sizeof(int) );  
-  Table->Vector_Model_Int_Variables_Time_0 = (int *)calloc( MODEL_STATE_VARIABLES, sizeof(int) );
-  /* BEGIN : -------------------------------------------------------------------------
-   * Stochastic Community Set Up
-   */
-  Community ** PATCH = (Community **)malloc( P->No_of_LOCAL_POPULATIONS * sizeof(Community *) );
-  Community_Allocation( PATCH, P ); 
-  Community_Initialization (PATCH, P);
-  /* The Parameter Model structure also keeps the three memmory addresses pointing to 
-   *   the Patch System, the Time Control structure, and the CPG structure to plot   
-   */
-  Table->Patch_System = PATCH;
-  P->CPG              = Table->CPG_STO; 
-  /* END ----------------------------------------------------------------------------
-   */
-
+  
 #if defined CPGPLOT_REPRESENTATION  /* Initial Plotting Time evolution: just frames!!! */
   int SAME_PLOT = 0;
   // C_P_G___S_U_B___P_L_O_T_T_I_N_G___n___P_L_O_T_S( CPG->DEVICE_NUMBER,
@@ -43,6 +22,32 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   /* BEGIN: Main loop: a number of REALIZATIONS (stochastic temporal evolutions) is computed */
   printf("Entering Generation of Stochastic Realizations...\n");   Press_Key();
   for (i=0; i < Time->Realizations; i++){
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */  
+    Table->Vector_Model_Variables = (double *)calloc( Table->MODEL_STATE_VARIABLES,
+						      sizeof(double) );
+    Table->Vector_Model_Int_Variables = (int *)calloc( Table->MODEL_STATE_VARIABLES,
+						       sizeof(int) );  
+    Table->Vector_Model_Int_Variables_Time_0 = (int *)calloc( Table->MODEL_STATE_VARIABLES,
+							      sizeof(int) );
+    Parameter_Values_into_Parameter_Table(Table);
+    P_A_R_A_M_E_T_E_R___I_N_I_T_I_A_L_I_Z_A_T_I_O_N (Table, P);
+    Table->P  = P;
+    printf(" Parameter_Model structure has been correctly allocated and initiated\n");
+  
+    /* BEGIN : -------------------------------------------------------------------------
+     * Stochastic Community Set Up
+     */
+    Community ** PATCH = (Community **)malloc( P->No_of_LOCAL_POPULATIONS * sizeof(Community *) );
+    Community_Allocation( PATCH, P ); 
+    Community_Initialization (PATCH, P);
+    /* The Parameter Model structure also keeps the three memmory addresses pointing to 
+     *   the Patch System, the Time Control structure, and the CPG structure to plot   
+     */
+    Table->Patch_System = PATCH;
+    P->CPG              = Table->CPG_STO; 
+    /* END ----------------------------------------------------------------------------
+   */
+    
     GSL_Init_Random_Seed(r); /* According to Computer time */
     /* Input variables: 
        . i, lable of current realization 
@@ -57,6 +62,12 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
     printf("Time failed in %d occasions out of %d time steps\n", Bad_Times, I_Time);
     printf("If the number of failed times is too big, EPSILON might be too small!\n");
     printf("Try to choose a larger EPSILON [Current value: -E %g]\n", Time->EPSILON);
+
+    Community_Free(PATCH, P);
+
+    free( Table->Vector_Model_Variables ); 
+    free( Table->Vector_Model_Int_Variables );
+    free( Table->Vector_Model_Int_Variables_Time_0 );
   }
   /* END: End of STOCHASTIC REALIZATIONS */
 
@@ -76,14 +87,11 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   C_P_G___S_U_B___P_L_O_T_T_I_N_G___E_R_R_O_R___B_A_R ( Table, SAME_PLOT, 
 							DATA_POINTS, Time->time_DEF, 
 							Time->AVE, Time->VAR ); 
+
+  
 #endif
   /*   END : Averaging stochastic realizations            */  
 
-  free( Table->Vector_Model_Variables ); 
-  free( Table->Vector_Model_Int_Variables );
-  free( Table->Vector_Model_Int_Variables_Time_0 );
-  
-  Community_Free(PATCH, P);
   free ( P );
   
   return(0);

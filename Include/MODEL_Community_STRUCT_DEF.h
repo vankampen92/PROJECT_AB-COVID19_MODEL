@@ -27,11 +27,11 @@ typedef struct Communityinfo
   int * Patch_Connections; 
 
   double * Total_Per_Capita_Out_Migration_Rate;
-  double ** Total_Imm_Rate_Per_Disease_Status;
+  double ** Total_Imm_Rate_Preassure;
   /* Total immigration caused by individuals in a given disease status across all 
      neighboring local populations
   */
-  double *** Imm_Rates_Per_Disease_Status;
+  double *** Imm_Rates_Preassure;
   
   double ** In_Migration_Vector; 
   double ** Out_Migration_Vector;

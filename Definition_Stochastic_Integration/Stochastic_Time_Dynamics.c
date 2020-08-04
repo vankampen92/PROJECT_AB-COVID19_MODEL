@@ -84,9 +84,7 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
     new = 0;
     while( Time_Current < Time->Time_Vector[j] && FROZEN_SYSTEM == 0 )
       {
-	
 	FROZEN_SYSTEM = Advance_Current_Time( Table, Rate, &Time_Current, &new );
-
       }
     /*     E N D
      * -------------------------------------------------------------------

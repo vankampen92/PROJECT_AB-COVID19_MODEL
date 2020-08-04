@@ -39,10 +39,10 @@
  Beta_32 = 5.0;
  Beta_33 = 5.0;
 
- Alpha_0 = 0.5 ;
- Alpha_1 = 0.5 ;
- Alpha_2 = 0.5 ;
- Alpha_3 = 0.5 ;
+ Alpha_0 = 0.01 ;
+ Alpha_1 = 0.01 ;
+ Alpha_2 = 0.1 ;
+ Alpha_3 = 0.2 ;
   
  Delta_0 = 0.25 ;
  Delta_1 = 0.25 ;

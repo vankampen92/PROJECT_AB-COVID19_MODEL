@@ -317,7 +317,10 @@ void Some_Other_Patch_Population_Decrease(int x, int a, int nS,
   Q = Table->TOTAL_No_of_DISEASE_STAGES * Table->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
 
   k = nS%Table->TOTAL_No_of_DISEASE_STAGES;
-  n_Patch = Discrete_Sampling(Patch[x]->Imm_Rates_Per_Disease_Status[a][k], Patch[x]->No_NEI) - 1;
+
+  assert(Patch[x]->Total_Imm_Rate_Preassure[a][k] > 0.0);
+  
+  n_Patch = Discrete_Sampling(Patch[x]->Imm_Rates_Preassure[a][k], Patch[x]->No_NEI) - 1;
 
   assert(Patch[Patch[x]->Patch_Connections[n_Patch]] == Patch[x]->NEI[n_Patch]);
 

@@ -36,15 +36,15 @@ void Community_Allocation ( Community ** PATCH, Parameter_Model * P )
 
     PATCH[i]->Total_Per_Capita_Out_Migration_Rate = (double *)calloc(n_Age, sizeof(double) );
 
-    PATCH[i]->Total_Imm_Rate_Per_Disease_Status = (double **)calloc(n_Age, sizeof(double *) );
+    PATCH[i]->Total_Imm_Rate_Preassure = (double **)calloc(n_Age, sizeof(double *) );
     for(a=0; a<n_Age; a++) 
-      PATCH[i]->Total_Imm_Rate_Per_Disease_Status[a] = (double *)calloc(K, sizeof( double *));  
+      PATCH[i]->Total_Imm_Rate_Preassure[a] = (double *)calloc(K, sizeof( double *));  
 
-    PATCH[i]->Imm_Rates_Per_Disease_Status = (double ***)calloc(n_Age, sizeof( double **));
+    PATCH[i]->Imm_Rates_Preassure = (double ***)calloc(n_Age, sizeof( double **));
     for(a=0; a<n_Age; a++) {
-      PATCH[i]->Imm_Rates_Per_Disease_Status[a] = (double **)calloc(K, sizeof( double *));    
+      PATCH[i]->Imm_Rates_Preassure[a] = (double **)calloc(K, sizeof( double *));    
       for(j=0; j<K; j++)
-	PATCH[i]->Imm_Rates_Per_Disease_Status[a][j] = (double *)calloc(no, sizeof( double ));
+	PATCH[i]->Imm_Rates_Preassure[a][j] = (double *)calloc(no, sizeof( double ));
     }
   }
 }
@@ -71,18 +71,18 @@ void Community_Free (Community ** PATCH, Parameter_Model * P)
       free(PATCH[i]->Out_Migration_Vector[a]);
       free(PATCH[i]->In_Migration_Vector[a]);
       for(j=0; j<K; j++)
-	free(PATCH[i]->Imm_Rates_Per_Disease_Status[a][j]);
-      free(PATCH[i]->Imm_Rates_Per_Disease_Status[a]);
+	free(PATCH[i]->Imm_Rates_Preassure[a][j]);
+      free(PATCH[i]->Imm_Rates_Preassure[a]);
     }
     free(PATCH[i]->Out_Migration_Vector);  
     free(PATCH[i]->In_Migration_Vector);
-    free(PATCH[i]->Imm_Rates_Per_Disease_Status);
+    free(PATCH[i]->Imm_Rates_Preassure);
     
     free(PATCH[i]->Total_Per_Capita_Out_Migration_Rate); 
 
     for(a=0; a<n_Age; a++) 
-      free(PATCH[i]->Total_Imm_Rate_Per_Disease_Status[a]);
-    free(PATCH[i]->Total_Imm_Rate_Per_Disease_Status);
+      free(PATCH[i]->Total_Imm_Rate_Preassure[a]);
+    free(PATCH[i]->Total_Imm_Rate_Preassure);
     
     free(PATCH[i]->NEI);
     free(PATCH[i]);
@@ -196,9 +196,9 @@ void Immigration_Preassure_on_Focal_Patch_Initialization( Community ** PATCH,
 	Imm_Rate = 0.0;
 	for(n=0; n < PATCH[i]->No_NEI; n++){
 	  Imm_Rate += PATCH[i]->In_Migration_Vector[a][n]*(double)PATCH[i]->NEI[n]->n[j]; 
-	  PATCH[i]->Imm_Rates_Per_Disease_Status[a][k][n] = PATCH[i]->In_Migration_Vector[a][n]*(double)PATCH[i]->NEI[n]->n[j];
-	  }
-	PATCH[i]->Total_Imm_Rate_Per_Disease_Status[a][k] = Imm_Rate;
+	  PATCH[i]->Imm_Rates_Preassure[a][k][n] = PATCH[i]->In_Migration_Vector[a][n]*(double)PATCH[i]->NEI[n]->n[j];
+	}
+	PATCH[i]->Total_Imm_Rate_Preassure[a][k] = Imm_Rate;
       }   
     }
   }   
