@@ -155,7 +155,7 @@ void Writing_Adjacency_List(Community ** PATCH)
     printf("\n");
   }
   
-  Press_Key();
+  // Press_Key();
 }
 
 void Immigration_Preassure_on_Focal_Patch_Initialization( Community ** PATCH,
@@ -216,6 +216,7 @@ void Network_Structure_Inititialization (Community ** PATCH, int TYPE_of_NETWORK
 
       no    = PATCH[0]->No_of_LOCAL_POPULATIONS;
       n_Age = PATCH[0]->TOTAL_No_of_AGE_CLASSES;
+      
       for( a=0; a<n_Age; a++ ) {
 	Total_Per_Capita_Out_Migration_Rate = 0.0;
 	
@@ -226,7 +227,7 @@ void Network_Structure_Inititialization (Community ** PATCH, int TYPE_of_NETWORK
 	      PATCH[i]->NEI[n] = PATCH[j];
 	      
 	      PATCH[i]->Out_Migration_Vector[a][n] = PATCH[i]->Metapop_Connectivity_Matrix[a][j][i];
-	      PATCH[i]->In_Migration_Vector[a][n] = PATCH[i]->Metapop_Connectivity_Matrix[a][i][j];
+	      PATCH[i]->In_Migration_Vector[a][n]  = PATCH[i]->Metapop_Connectivity_Matrix[a][i][j];
 
 	      PATCH[i]->Patch_Connections[n] = j;
 

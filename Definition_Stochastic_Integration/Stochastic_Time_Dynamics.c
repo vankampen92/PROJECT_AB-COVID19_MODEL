@@ -91,6 +91,7 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
     /*     E N D
      * -------------------------------------------------------------------
      */
+    
 
     if( Time_Current > Time->Time_Vector[j] + Time->EPSILON){
       (*Bad_Times)++;
@@ -143,6 +144,16 @@ void S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S( int i,
       fprintf(FP,"\n");
       /*   END: Writing costumized file        */
     }
+
+#if defined VERBOSE
+    printf(" Total population across the system at current time (t = %g)\n", 
+	   Time_Current );
+    
+    Print_Meta_Community_Patch_System (Table);
+    Press_Key();
+#endif
+
+    
   }/* go further to the next time           */
 
   fclose(FP);

@@ -244,6 +244,8 @@ void Parameter_Model_Copy (Parameter_Model * P_Destination, Parameter_Model * P_
   /* Total Number of Events within a patch, i.e., 25 * 4 = 100 */
   P_Destination->No_of_EVENTS               = P_Source->No_of_EVENTS;
   /* Number of Events within an age class, i.e., 25           */
+
+  P_Destination->Metapop_Connectivity_Matrix = P_Source->Metapop_Connectivity_Matrix; 
 }
 
 void  P_A_R_A_M_E_T_E_R___I_N_I_T_I_A_L_I_Z_A_T_I_O_N ( Parameter_Table * Table,
@@ -474,7 +476,9 @@ void  P_A_R_A_M_E_T_E_R___I_N_I_T_I_A_L_I_Z_A_T_I_O_N ( Parameter_Table * Table,
   P->TOTAL_No_of_EVENTS         = Table->TOTAL_No_of_EVENTS;
   /* Total Number of Events within a patch, i.e., 18 * 4 = 72 */
   P->No_of_EVENTS               = Table->No_of_EVENTS;
-  /* Number of Events within an age class, i.e., 18           */ 
+  /* Number of Events within an age class, i.e., 18           */
+
+  P->Metapop_Connectivity_Matrix = Table->Metapop_Connectivity_Matrix; 
 }
 
 void Parameter_Model_Copy_into_Parameter_Table (Parameter_Table * P_Destination, Parameter_Model * P_Source)
@@ -924,6 +928,8 @@ void Parameter_Table_Copy_into_Parameter_Model (Parameter_Model * P_Destination,
   /* Total Number of Events within a patch, i.e., 18 * 4 = 72 */
   P_Destination->No_of_EVENTS               = P_Source->No_of_EVENTS;
   /* Number of Events within an age class, i.e., 18           */
+  
+  P_Destination->Metapop_Connectivity_Matrix = P_Source->Metapop_Connectivity_Matrix; 
 }
 
 void Vector_Entries_into_Parameter_Model ( const gsl_vector * X, Parameter_Model * P,

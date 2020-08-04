@@ -8,8 +8,6 @@
 extern gsl_rng * r;   /* Global generator (define at the main program level */
 #define RANDOM gsl_rng_uniform_pos(r)
 
-void assert_Total_Population (Parameter_Table * Table, double * Y);
-
 // #define ASSERTION_TRUE
 
 void Execute_One_Step(Community ** SP,
@@ -44,7 +42,7 @@ void Execute_One_Step(Community ** SP,
   nS =  n0S  + n*Table->TOTAL_No_of_DISEASE_STAGES;   jS = nS + x*Q;
   nE =  n0E  + n*Table->TOTAL_No_of_DISEASE_STAGES;   jE = nE + x*Q;
   nI1=  n0I1 + n*Table->TOTAL_No_of_DISEASE_STAGES;  jI1 = nI1 + x*Q;
-  nI2=  n0I2  + n*Table->TOTAL_No_of_DISEASE_STAGES; jI2 = nI2 + x*Q;
+  nI2=  n0I2 + n*Table->TOTAL_No_of_DISEASE_STAGES;  jI2 = nI2 + x*Q;
   nA =  n0A  + n*Table->TOTAL_No_of_DISEASE_STAGES;   jA = nA + x*Q;
   nAd=  n0Ad + n*Table->TOTAL_No_of_DISEASE_STAGES;  jAd = nAd + x*Q;
   nY =  n0Y  + n*Table->TOTAL_No_of_DISEASE_STAGES;   jY = nY + x*Q;
@@ -128,14 +126,14 @@ void Execute_One_Step(Community ** SP,
 
     case  10: /* 10 (Age n): Infectious I2 into Recovered (I2 -> I2-1 and R --> R + 1) */        /* 5 */
               /*                                                    and AR --> AR + 1  */
-      Positivity_Control( 10, Table, x, jI2, Y[jI2], J[jI2] );
+      Positivity_Control( 10, Table, x, jI2, Y[jI2], J[jI2]);
       Y[jI2]--; J[jI2]--;  Patch->n[nI2]--;
       Y[jR]++;  J[jR]++;   Patch->n[nR]++;
       Y[jaR]++; J[jaR]++;  Patch->n[aR]++;
 
       break;
     case  11: /* 11 (Age n): Infectious I2 into severe symptoms ( I2 -> I2-1 and Y --> Y + 1) */ /* 6 */
-      Positivity_Control( 11, Table, x, jI2, Y[jI2], J[jI2] );
+      Positivity_Control( 11, Table, x, jI2, Y[jI2], J[jI2]);
       Y[jI2]--; J[jI2]--;  Patch->n[nI2]--;
       Y[jY]++;  J[jY]++;   Patch->n[nY]++;
 
@@ -160,7 +158,7 @@ void Execute_One_Step(Community ** SP,
 		  because they have not been detected by the system                      */      /* 7 */
       Positivity_Control( 14, Table, x, jA, Y[jA], J[jA]);
       Y[jA]--; J[jA]--;  Patch->n[nA]--;
-      Y[jR]++; J[jR]++;  Patch->n[nR]++;
+			  Y[jR]++; J[jR]++;  Patch->n[nR]++;
 
       break;
     case  15:  /* 15 (Age n): Assymptomatic are detected   (A -> A-1 and Ad --> Ad + 1)  */      /* 8 */
@@ -247,11 +245,8 @@ void Execute_One_Step(Community ** SP,
       Press_Key();
       exit(0);
     }
-  
-#if defined ASSERTION_TRUE
-  assert_Total_Population (Table, Y); 
-#endif
-  
+
+
   (*Event) = n_Event;  (*x_Patch) = x;
 }
 
@@ -308,7 +303,7 @@ void Some_Other_Patch_Population_Decrease(int x, int a, int nS,
      . Table: Parameter Table
 
   */
-  int Q, k, i, j, n_Patch;
+  int Q, i, j, n, n_Patch;
   Community ** Patch = Table->Patch_System;
 
   int    * J = Table->Vector_Model_Int_Variables;
@@ -316,16 +311,22 @@ void Some_Other_Patch_Population_Decrease(int x, int a, int nS,
 
   Q = Table->TOTAL_No_of_DISEASE_STAGES * Table->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
 
-  k = nS%Table->TOTAL_No_of_DISEASE_STAGES;
-  n_Patch = Discrete_Sampling(Patch[x]->Imm_Rates_Per_Disease_Status[a][k], Patch[x]->No_NEI) - 1;
+  double * Imm_Preassure_Vector = (double *)calloc( Patch[x]->No_NEI, sizeof(double) );
 
+  for(n=0; n<Patch[x]->No_NEI; n++)
+    Imm_Preassure_Vector[n] = Patch[x]->In_Migration_Vector[a][n]*(double)Patch[x]->NEI[n]->n[nS];
+    
+  n_Patch = Discrete_Sampling( Imm_Preassure_Vector, Patch[x]->No_NEI ) - 1;
+  
   assert(Patch[Patch[x]->Patch_Connections[n_Patch]] == Patch[x]->NEI[n_Patch]);
-
+  
   j = nS + Patch[x]->Patch_Connections[n_Patch]*Q;
-
-  Positivity_Control( 100, Table, Patch[x]->Patch_Connections[n_Patch], j, Y[j], J[j]);
+  
+  Positivity_Control( 100, Table, Patch[x]->Patch_Connections[n_Patch], j, Y[j], J[j] );
   Y[j]--; J[j]--;  Patch[x]->NEI[n_Patch]->n[nS]--;
   Local_Population_Decrease ( a, Patch[x]->NEI[n_Patch] );
+
+  free(Imm_Preassure_Vector); 
 }
 
 void Some_Other_Patch_Population_Increase(int x, int a, int nS,
@@ -363,7 +364,7 @@ void Positivity_Control( int Event, Parameter_Table * Table,
   Community ** Patch = Table->Patch_System;
 
 #if defined ASSERTION_TRUE
-  
+
   Q = Table->TOTAL_No_of_DISEASE_STAGES * Table->TOTAL_No_of_AGE_CLASSES; /* Ex: 11 times 4 */
   nS = jS%Q;
 
@@ -384,15 +385,4 @@ void Positivity_Control( int Event, Parameter_Table * Table,
   }
   
 #endif
-}
-
-void assert_Total_Population (Parameter_Table * Table, double * Y)
-{
-  double N, N_Time_0;
-  
-  N = Total_Population (Y, Table );
-  
-  N_Time_0 = Table->N * Table->No_of_LOCAL_POPULATIONS * Table->TOTAL_No_of_AGE_CLASSES;
-
-  assert(N <= N_Time_0); /* Because Disease Induced Mortalty */
 }

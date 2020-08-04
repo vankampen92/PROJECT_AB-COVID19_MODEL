@@ -5,6 +5,7 @@
 
 #include "global.h"
 
+
 gsl_rng * r; /* Global generator defined in main.c */
 
 /* This code calculates ODE model temporal evolution for a range COVID19 models
@@ -17,8 +18,11 @@ gsl_rng * r; /* Global generator defined in main.c */
    
    Execution example plotting the temporal evolution of the full list of output variables (non-model state variables): 
    
-   . ~$ ../SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 5 -n 4 -v0 8 -v1 9 -v2 10 -v3 12 -G0 2 -G1 2 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -xn 0 -xN 10000 -H2 4.0 -H1 0.3  -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 6000.0 
+   . ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 1 -n 4 -v0 8 -v1 9 -v2 10 -v3 12 -G0 2 -G1 2 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -tE 0.1 -xn 0 -xN 10000 -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 6000.0 -H2 4.0 -H0 0.01 -H1 0.3 -H9 0.0001 -H37 0.001 -H38 0.05 -H39 0.2
 
+    . ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 4 -n 8 -v0 0 -v1 1 -v2 2 -v3 3 -v4 4 -v5 5 -v6 6 -v7 7 -G0 4 -G1 2 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -tE 0.1 -xn 0 -xN 10000 -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 1.0 -H2 4.0 -H0 0.01 -H1 0.3 -H9 0.0001 -H37 0.001 -H38 0.05 -H39 0.2
+
+   -H0 [Kappa] -H1 [Beta] -H9 [p_0] -H37 [p_1] -H38 [p_2] -H39 [p_3]
    -xn TYPE of INITIAL CONDITION (0 from default values or Input Args; 
                                   1 at Random; 
                                   2 from fixed Point) 
@@ -28,6 +32,7 @@ gsl_rng * r; /* Global generator defined in main.c */
    See denition_OutPut_Variables.c (Genuine/Derived Output Variable): 
     -v0  
 */
+
 
 int main(int argc, char **argv)
 {
@@ -131,7 +136,7 @@ int main(int argc, char **argv)
   /*   END: Checking Random Number Generator Setup */
 #endif
 
-  double Initial_Exposed_Population = 1.0; 
+  double Initial_Exposed_Population = 100.0; 
   Initial_Condition_from_Value_into_Parameter_Table (&Table, Initial_Exposed_Population); 
   
   /* Deterministic Time Dynamics */

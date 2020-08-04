@@ -19,7 +19,7 @@
 
   gsl_rng_env_setup();
   
-  T = gsl_rng_ranlux389; //T = gsl_rng_taus2; //T = gsl_rng_default;
+  T = gsl_rng_taus2; //T = gsl_rng_default; T = gsl_rng_ranlux389;
 
   r = gsl_rng_alloc(T);
 

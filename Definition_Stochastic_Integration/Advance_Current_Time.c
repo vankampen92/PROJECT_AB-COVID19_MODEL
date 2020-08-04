@@ -67,9 +67,9 @@ int Advance_Current_Time( Parameter_Table * Table,
 
 #if defined VERBOSE
   printf(" Total population across the system at current time (t = %g)\n", 
-     (*Time_Current) );
+	 (*Time_Current) );
   
-  Print_Meta_Community_Patch_System (Table); 
+  Print_Meta_Community_Patch_System (Table);
 #endif
   
   return(0);
