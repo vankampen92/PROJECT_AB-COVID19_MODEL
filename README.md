@@ -9,11 +9,12 @@ This is a numerical library for C and C++ programmers. It is free software under
 This is a set of functions written in C relying on cpgplot primitives from pgplot, and plplot. As a consequence, the CPGPLOT Graphix library, in turns, depends on: 
 ### [pgplot](/http://www.astro.caltech.edu/~tjp/pgplot/)
 ### [plplot](http://plplot.sourceforge.net/)
-You can git clone the CPGPLOT library from my repository upon request (dalonso@ceab.csic.es).
+You can git clone the CPGPLOT library from my repository.
 
 ### What is this repository for? ###
 
-* This repository sets up a number of Sexual-Transmitted Disease Models with application to the spread of HIV-AIDS in heterogeneous populations in endemic regions from Africa 
+* This repository sets up a number of SIR-like models with application to the spread of COVI19 in heterogeneous populations (age classes) distributed across a network metatapopulation structure 
+
 * Version: 0.0.0.999
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
@@ -26,22 +27,23 @@ Notice that the linking command from most makefiles contains, at least, the foll
 * -lWL -lpng -lplplotd -lpgplot -lcpgplot 
 * -lda_cpgplot_XY_GRID_FILE -lda_cpgplot_BASIC
 
-The first two ones are basic GSL libraries. The following 5 are required to use primitive plotting functions from the graphic libraries cpplot and plplot. The final two are mandatory when using higher-level plotting functions from the CPGPLOT Graphix library. All of them are usually required to produce a graphical output. However, the control variable (see 
-any makefile) 'CPG" can also be set up to 'NON_CPG_REPRESENTATION' and, then, through conditional compilation, the same program is built
-to just run the numerical computations. In all cases, the output may be saved in files. 
+The first two ones are basic GSL libraries. The following 5 are required to use primitive plotting functions from the graphic libraries cpplot and plplot. The final two are mandatory when using higher-level plotting functions from the CPGPLOT Graphix library. All of them are usually required to produce a graphical output. However, the control variable (see any makefile) 'CPG" can also be set up to 'NON_CPG_REPRESENTATION' and, then, through conditional compilation, the same program is built to just run the numerical computations without graphics. In all cases, the output may be saved in files. 
 
-When you git clone the repository on your machine, you should do it from your home directory. As a result, the directory 'project_std-aids_models' will be expanded on ~/project_std_aids_models, as usual. Then, do:
+When you git clone the repository on your machine, you should do it from your home directory. As a result, the directory 'PROJECT_AB-COVID19_MODEL' will be created on your machine.
 
-~$ ln -s project_std_aids_models PROJECT_STD_AIDS_MODELS 
+If graphic libraries have been correctly installed, this should be enough to make all makefiles work out of the box. Remember though you require to have also git cloned my CPGPLOT repository on your machine. To be clear, you should end up with two directories:
 
-If graphic libraries have been correctly installed, this symbolic link should be enough to make all makefiles work out of the box.  
+* -$ ./CPGPLOT
+* -$ ./PROJECT_AB-COVID_MODEL
+
+both in you home directory.
 
 * Summary of set up:
 	+ #### 1. Install GSL library
 	+ #### 2. Install plplot library
 	+ #### 3. Install pgplot library
 	+ #### 4. Install CPGPLOT Graphix library
-	+ #### 5. git clone https://p252205@bitbucket.org/p252205/project_std_aids_models.git
+	+ #### 5. git clone 
 	+ #### 6. ln -s project_std_aids_models PROJECT_STD_AIDS_MODELS
 	+ #### 7. Tests: 
 	In order to test if pgplot, plplot and CPGPLOT are correctly installed in your machine, you can expand the tar file PROJECT_CPGPLOT_EXAMPLES.tar, which is in the project root directory on your home directory. Then you will get the directory ~/PROJECT_CPGPLOT_EXAMPLES. In that directory, there is a simple example of how to use the CPGPLOT library. You build it by typing:
