@@ -13,7 +13,7 @@ You can git clone the CPGPLOT library from my repository.
 
 ### What is this repository for? ###
 
-* This repository sets up a number of SIR-like models with application to the spread of COVI19 in heterogeneous populations (age classes) distributed across a network metatapopulation structure 
+* This repository sets up a number of SIR-like models with application to the spread of COVI19 in heterogeneous populations (age classes) distributed across a network metatapopulation structure. Both ODEs and Gillespie simulations are implemented. 
 
 * Version: 0.0.0.999
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
