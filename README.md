@@ -68,7 +68,7 @@ both in you home directory.
 		
 		+ ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 4 -n 1 -v0 12 -G0 1 -G1 1 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -tE 0.1 -xn 0 -xN 10000 -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 7000.0 -H2 2.5 -H0 0.01 -H1 0.3 -H9 0.0001 -H37 0.001 -H38 0.05 -H39 0.2
 		
-The code generates a bunch of stochatic realizations (-tR 10) and presents one output variable (-n 1), thi is, the epidemic curve of the detected infection (-v0 12) across 4 (-HN 4) local populations with 4 age classes conntected by individual migrations. These are represented on a plot as they are produced. 
+	The code generates a bunch of stochatic realizations (-tR 10) and presents one output variable (-n 1), thi is, the epidemic curve of the detected infection (-v0 12) across 4 (-HN 4) local populations with 4 age classes conntected by individual migrations. These are represented on a plot as they are produced. 
 
 ### Contribution guidelines ###
 
