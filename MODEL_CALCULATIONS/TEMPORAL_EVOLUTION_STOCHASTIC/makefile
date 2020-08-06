@@ -3,7 +3,6 @@
 #/*                           David Alonso, 2011 (c)                          */
 #/*                                                                           */
 #/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-PROJECT_DIR=${HOME}/PROJECT_AB-COVID19_MODEL/#########
 TIME_TREND_DIR=${PROJECT_DIR}Definition_Time_Trend_Dependence/
 IO_DIR=${PROJECT_DIR}Library/IO_Library/
 OPT_DIR= ${PROJECT_DIR}Library/Optimization_Library/
@@ -14,7 +13,6 @@ C_NR=${PROJECT_DIR}Library/C_NumRecip/#############
 GSL_DA=${PROJECT_DIR}Library/GSL_RANDOM/##########
 HEAD.H =${PROJECT_DIR}Include/MODEL.h##############
 INCLUDE_DIR=${PROJECT_DIR}Include##################
-CPGPLOT = ${HOME}/CPGPLOT/#########################
 # EXTRA_LIBRARY_PATH=-L/usr/local/pgplot#############
 EXTRA_LIBRARY_PATH+=-L${CPGPLOT}###################
 EXTRA_LIBRARY_PATH+=-L${CPGPLOT}library/###########
