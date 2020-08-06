@@ -57,7 +57,7 @@ both in you home directory.
 		
 		+ ~/PROJECT_CPGPLOT_EXAMPLES/PLOT -G29 ?
 		
-	and see the different avaiable graphic formats in which plots can be saved. Notice that sometimes the value for these input arguments is overriden by the internal program code. When this happens, it is for a good reason. Please check the code to understand why and make moodgodfications at your own risk. Be creative.   
+	and see the different avaiable graphic formats in whcodeich plots can be saved. Notice that sometimes the value for these input arguments is overriden by the internal program code. When this happens, it is for a good reason. Please check the code to understand why and make moodgodfications at your own risk. Be creative.   
 	
 	+ #### 7. Examples:
 	See, for instance, ./MODEL_CALCULATIONS/TEMPORAL_EVOLUTION_STOCHASTICS/main.c, and follow the directions to compile and run the code: 
@@ -65,7 +65,7 @@ both in you home directory.
 		+ ~$ make MODEL=SEI1I2AAdYR_AGE_MPOP
 		
 		+ ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -h  (help associated to type of model 3. That's why, we have -y0 3)
-		
+		code
 		+ ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 4 -n 1 -v0 12 -G0 1 -G1 1 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -tE 0.1 -xn 0 -xN 10000 -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 7000.0 -H2 2.5 -H0 0.01 -H1 0.3 -H9 0.0001 -H37 0.001 -H38 0.05 -H39 0.2
 		
 	The code depends on some auxiliary libraries in ./Library  and ./Definition_Error_Model subdirectories. You will notice that you need to generate these libraries before making 'make MODEL=SEI1I2AAdYR_AGE_MPOP'. If you do it before, gcc will not find these libraries. Also, the code is linked against R libraries.  You may remove these R links or install R in your system. I recommend this 2n option. This will allow you to create shared libraries that, then, can be called as standard R funcions from RStudio, for example. The call on the third line above generates a bunch of stochatic realizations (-tR 10) and presents one output variable (-n 1), thi is, the epidemic curve of the detected infection (-v0 12) across 4 (-HN 4) local populations with 4 age classes conntected by individual migrations. These are represented on a plot as they are produced. 
@@ -77,5 +77,5 @@ both in you home directory.
 * Other guidelines
 
 ### Who do I talk to? ###
-
+code
 * Drop an email to David Alonso (<dalonso@ceab.csic.es>)
