@@ -56,7 +56,7 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
     printf("Realization: %d of a total of %d\n", i+1, Time->Realizations);
     printf("Time failed in %d occasions out of %d time steps\n", Bad_Times, I_Time);
     printf("If the number of failed times is too big, EPSILON might be too small!\n");
-    printf("Try to choose a larger EPSILON [Current value: -E %g]\n", Time->EPSILON);
+    printf("Try to choose a larger EPSILON [Current value: -tE %g]\n", Time->EPSILON);
   }
   /* END: End of STOCHASTIC REALIZATIONS */
 
