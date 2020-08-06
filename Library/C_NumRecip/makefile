@@ -13,8 +13,8 @@
 # The generated libraries are libNum_Rec.a and libNRUTL.a
 # ==========================================
 
-C_NUMREC=${HOME}/PROJECT_AB-COVID19_MODEL/Library/C_NumRecip/
-EXTRA_INCLUDE_PATH= -I${C_NUMREC}
+C_NUMREC="$(PROJECT_DIR)/Library/C_NumRecip/"
+EXTRA_INCLUDE_PATH= -I${C_NUMREC} 
 CFLAGS=-g  -fPIE -DHAVE_INLINE ${EXTRA_INCLUDE_PATH}
 ###CFLAGS= -Wall -O21 
 COMPILER=gcc
