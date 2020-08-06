@@ -3,10 +3,9 @@
 # =======================
 
 # Gnu C make cpgplot_GRID UTILS (libda_cpgplot_GRID.a)
-PROJECT_DIR          = ${HOME}/PROJECT_AB-COVID19_MODEL/
-LIB_DIR              = ${PROJECT_DIR}Library/IO_Library/
-RANDOM_DIR           = ${PROJECT_DIR}Library/GSL_RANDOM/
-LIB_OPT              = ${PROJECT_DIR}Library/Optimization_Library/
+LIB_DIR              = $(PROJECT_DIR)Library/IO_Library/
+RANDOM_DIR           = $(PROJECT_DIR)Library/GSL_RANDOM/
+LIB_OPT              = $(PROJECT_DIR)Library/Optimization_Library/
 INCLUDE_R_DIR=/usr/share/R/include/
 EXTRA_INCLUDE_PATH   = -I${LIB_DIR} -I${PROJECT_DIR} -I${PROJECT_DIR}Include/ -I${RANDOM_DIR} -I${INCLUDE_R_DIR} -I${LIB_OPT}
 

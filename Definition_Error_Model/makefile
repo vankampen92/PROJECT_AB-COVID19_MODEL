@@ -2,9 +2,13 @@
 #     LIBRARY make
 # =======================
 
+<<<<<<< HEAD
 # Gnu C make:
 PROJECT_DIR          = ${HOME}/PROJECT_AB-COVID19_MODEL/
 CPGPLOT              = ${HOME}/CPGPLOT/#########################
+=======
+# Gnu C make cpgplot_GRID UTILS (libda_cpgplot_GRID.a)
+>>>>>>> 6c098344c66f6106a218418cbaad326b2fb77a2b
 LIB_DIR              = ${PROJECT_DIR}Library/Optimization_Library/
 RANDOM_DIR           = ${PROJECT_DIR}Library/GSL_RANDOM/
 IO_DIR               = ${PROJECT_DIR}Library/IO_Library/
