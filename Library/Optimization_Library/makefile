@@ -34,5 +34,7 @@ da_Optimization: ${OBJECTS}
 da_Optimization_SO: ${OBJECTS}
 	gcc -shared -o libda_Optimization.so ${OBJECTS}
 
+all: da_Optimization da_Optimization_SO
+
 clean:
 	rm -f *.o *~
