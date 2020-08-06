@@ -42,7 +42,7 @@ both in you home directory.
 	+ #### 1. Install GSL library
 	+ #### 2. Install plplot library
 	+ #### 3. Install pgplot library
-	+ #### 4. Install CPGPLOT Graphix library
+	+ #### 4. git clone https://github.com/vankampen92/CPGPLOT
 	+ #### 5. git clone https://github.com/vankampen92/PROJECT_AB-COVID19_MODEL.git
 	+ #### 6. Tests: 
 	In order to test if pgplot, plplot and CPGPLOT are correctly installed in your machine, you can expand the tar file PROJECT_CPGPLOT_EXAMPLES.tar, which is in the project root directory on your home directory. Then you will get the directory ~/PROJECT_CPGPLOT_EXAMPLES. In that directory, there is a simple example of how to use the CPGPLOT library. You build it by typing:
@@ -68,7 +68,7 @@ both in you home directory.
 		
 		+ ~$ ./SEI1I2AAdYR_AGE_MPOP -y0 3 -HN 4 -n 1 -v0 12 -G0 1 -G1 1 -tn 50 -t0 0.0 -t1 50.0 -t4 0 -tR 10 -tE 0.1 -xn 0 -xN 10000 -G2 1 -G3 0.0 -G4 50.0 -G5 1 -G6 0.0 -G7 7000.0 -H2 2.5 -H0 0.01 -H1 0.3 -H9 0.0001 -H37 0.001 -H38 0.05 -H39 0.2
 		
-	The code generates a bunch of stochatic realizations (-tR 10) and presents one output variable (-n 1), thi is, the epidemic curve of the detected infection (-v0 12) across 4 (-HN 4) local populations with 4 age classes conntected by individual migrations. These are represented on a plot as they are produced. 
+	The code depends on some libraries in ./Library  and ./Definition_Error_Model subdirectories. You will notice that you need to generate these libraries before making 'make MODEL=SEI1I2AAdYR_AGE_MPOP'. If you do it before, gcc will not find these libraries. Also, the code is linked to R libraries.  You may remove these R links or install R in your system. I recommend this 2n option. This will allow you to create shared libraries that, then, can be called as standard R funcions from RStudio, for example. The code generates a bunch of stochatic realizations (-tR 10) and presents one output variable (-n 1), thi is, the epidemic curve of the detected infection (-v0 12) across 4 (-HN 4) local populations with 4 age classes conntected by individual migrations. These are represented on a plot as they are produced. 
 
 ### Contribution guidelines ###
 
