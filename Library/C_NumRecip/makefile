@@ -30,5 +30,7 @@ NumRec: ${OBJECTS} nr.h
 nrutil: nrutil.o nrutil.h
 	ar -q libNRUTL.a nrutil.o
 
+all: NumRec nrutil
+
 clean:  
-	rm -f *.o *~
+	rm -f *.o *~ 

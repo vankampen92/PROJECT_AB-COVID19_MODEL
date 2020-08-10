@@ -27,5 +27,7 @@ da_IO: ${OBJECTS}
 da_IO_SO: ${OBJECTS}
 	gcc -shared -o libda_IO.so ${OBJECTS}
 
+all: da_IO 
+
 clean:
 	rm -f *.o *~
