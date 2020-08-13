@@ -1,175 +1,506 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.16)  12 MAY 2020 17:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex 2020.6.2)  10 AUG 2020 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Parameter_Table_Master
 (./Parameter_Table_Master.tex
-LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 47 language(s) loaded.
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
-\abovecaptionskip=\skip41
-\belowcaptionskip=\skip42
-\bibindent=\dimen102
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip43
-\LTright=\skip44
-\LTpre=\skip45
-\LTpost=\skip46
-\LTchunksize=\count87
-\LTcapwidth=\dimen103
-\LT@head=\box26
-\LT@firsthead=\box27
-\LT@foot=\box28
-\LT@lastfoot=\box29
-\LT@cols=\count88
-\LT@rows=\count89
-\c@LT@tables=\count90
-\c@LT@chunks=\count91
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip49
+\LTright=\skip50
+\LTpre=\skip51
+\LTpost=\skip52
+\LTchunksize=\count175
+\LTcapwidth=\dimen135
+\LT@head=\box45
+\LT@firsthead=\box46
+\LT@foot=\box47
+\LT@lastfoot=\box48
+\LT@cols=\count176
+\LT@rows=\count177
+\c@LT@tables=\count178
+\c@LT@chunks=\count179
 \LT@p@ftn=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Driver file: dvips.def on input line 225.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count92
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
 )
 (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen104
-\extrarowheight=\dimen105
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen136
+\ar@mcellbox=\box49
+\extrarowheight=\dimen137
 \NC@list=\toks15
-\extratabsurround=\skip47
-\backup@length=\skip48
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box50
 )
 \everycr=\toks16
-\minrowclearance=\skip49
+\minrowclearance=\skip55
 )
-\rownum=\count93
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
-Package xcolor Info: Model `RGB' extended on input line 1353.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+\rownum=\count180
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
-File: dvipsnam.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip50
-\bibsep=\skip51
+\bibhang=\skip56
+\bibsep=\skip57
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count94
+\c@NAT@ctr=\count181
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+File: l3backend-dvips.def 2020-02-03 L3 backend support: dvips
+\l__pdf_internal_box=\box51
+\g__pdf_backend_object_int=\count182
+\l__pdf_backend_content_box=\box52
+\l__pdf_backend_model_box=\box53
+\g__pdf_backend_annotation_int=\count183
+\g__pdf_backend_link_int=\count184
+\g__pdf_backend_link_sf_int=\count185
 )
 
 LaTeX Warning: Unused global option(s):
     [letter].
 
-No file Parameter_Table_Master.aux.
+(./Parameter_Table_Master.aux)
 \openout1 = `Parameter_Table_Master.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count95
-\scratchdimen=\dimen106
-\scratchbox=\box30
-\nofMPsegments=\count96
-\nofMParguments=\count97
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count98
-\MPscratchDim=\dimen107
-\MPnumerator=\count99
-\makeMPintoPDFobject=\count100
-\everyMPtoPDFconversion=\toks18
-) (./Latex_Parameter_Table.tex
+ (./Latex_Parameter_Table.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 3.
+(Font)              <12> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 3.
+(Font)              <6> on input line 4.
 
-Overfull \hbox (59.65295pt too wide) in alignment at lines 31--22
- [] [] [] [] [] [] 
+Underfull \hbox (badness 10000) in paragraph at lines 12--12
+[]|\OT1/cmr/m/n/12 Isolation ef-fec-tive-ness of
  []
 
 
-Overfull \hbox (59.65295pt too wide) in alignment at lines 22--42
- [] [] [] [] [] [] 
+Underfull \hbox (badness 2229) in paragraph at lines 16--16
+[]|\OT1/cmr/m/n/12 Age-dependent prob-a-bil-ity
  []
 
+
+Underfull \hbox (badness 6961) in paragraph at lines 20--20
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 21--21
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 22--22
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 23--23
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 25--25
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 26--26
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 27--27
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 28--28
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 29--29
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 30--30
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 31--31
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 32--32
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 33--33
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 34--34
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 6961) in paragraph at lines 35--35
+[]|\OT1/cmr/m/n/12 Contact Ma-trix El-e-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
+[]|\OT1/cmr/m/n/12 Age-dependent disease-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
+[]|\OT1/cmr/m/n/12 Age-dependent disease-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+[]|\OT1/cmr/m/n/12 Age-dependent disease-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+[]|\OT1/cmr/m/n/12 Age-dependent disease-
+ []
+
+
+Underfull \hbox (badness 2229) in paragraph at lines 44--44
+[]|\OT1/cmr/m/n/12 Age-dependent prob-a-bil-ity
+ []
+
+
+Underfull \hbox (badness 2229) in paragraph at lines 45--45
+[]|\OT1/cmr/m/n/12 Age-dependent prob-a-bil-ity
+ []
+
+
+Underfull \hbox (badness 2229) in paragraph at lines 46--46
+[]|\OT1/cmr/m/n/12 Age-dependent prob-a-bil-ity
+ []
+
+! Misplaced \noalign.
+\caption ->\noalign 
+                    \bgroup \@ifnextchar [{\egroup \LT@c@ption \@firstofone ...
+l.49 \caption
+             {Model Parameters for the AIDS-HIV transmission model. Model pa...
+
+? 
+! Misplaced \omit.
+\multispan ->\omit 
+                   \@multispan 
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Extra }, or forgotten \endgroup.
+<template> ...lax \@endpbox \do@row@strut \egroup 
+                                                  \egroup \begingroup \CT@se...
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Extra }, or forgotten \endgroup.
+<template> ...dpbox \do@row@strut \egroup \egroup 
+                                                  \begingroup \CT@setup \CT@...
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.49 ...undary values defined in a boundary file.}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.50 \end{table}
+                
+? 
+! Missing \cr inserted.
+<inserted text> 
+                \cr 
+l.50 \end{table}
+                
+? 
+! Extra }, or forgotten \endgroup.
+\color@endbox ->\color@endgroup \egroup 
+                                        
+l.50 \end{table}
+                
+? 
+
+! LaTeX Error: \begin{longtable} on input line 31 ended by \end{table}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.50 \end{table}
+                
+? 
 )
-Overfull \hbox (59.65295pt too wide) in alignment at lines 42--34
- [] [] [] [] [] [] 
- []
 
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \caption
+             {caption for this table}
+? 
+! Misplaced \crcr.
+\endlongtable ->\crcr 
+                      \noalign {\let \LT@entry \LT@entry@chop \xdef \LT@save...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \noalign.
+\endlongtable ->\crcr \noalign 
+                               {\let \LT@entry \LT@entry@chop \xdef \LT@save...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \crcr.
+\LT@echunk ->\crcr 
+                   \LT@save@row \cr \egroup \global \setbox \@ne \lastbox \u...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced alignment tab character &.
+<argument> &
+            
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \omit.
+\LT@entry ...->\ifhmode \@firstofone {&}\fi \omit 
+                                                  \ifnum #1=\c@LT@chunks \el...
+l.34 \end{longtable}
+                    
+? 
+! Misplaced \cr.
+\LT@echunk ->\crcr \LT@save@row \cr 
+                                    \egroup \global \setbox \@ne \lastbox \u...
+l.34 \end{longtable}
+                    
+? 
+! Extra }, or forgotten \endgroup.
+\LT@echunk ->\crcr \LT@save@row \cr \egroup 
+                                            \global \setbox \@ne \lastbox \u...
+l.34 \end{longtable}
+                    
+? 
+! Extra }, or forgotten \endgroup.
+\LT@echunk ...etbox \@ne \lastbox \unskip \egroup 
+                                                  
+l.34 \end{longtable}
+                    
+? 
+
+! LaTeX Error: \begin{document} ended by \end{longtable}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34 \end{longtable}
+                    
+? 
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.34 \end{longtable}
+                    
+? 
+
+! LaTeX Error: \begin{document} ended by \end{center}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \end{center}
+                 
+? 
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.36 \end{center}
+                 
+? 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-(./Parameter_Table_Master.aux) ) 
+] (./Parameter_Table_Master.aux) ) 
 Here is how much of TeX's memory you used:
- 1970 strings out of 494110
- 24432 string characters out of 6156507
- 107847 words of memory out of 5000000
- 5375 multiletter control sequences out of 15000+600000
- 6683 words of font info for 24 fonts, out of 8000000 for 9000
+ 1556 strings out of 482347
+ 20737 string characters out of 5941877
+ 283316 words of memory out of 5000000
+ 16696 multiletter control sequences out of 15000+600000
+ 535381 words of font info for 34 fonts, out of 8000000 for 9000
  445 hyphenation exceptions out of 8191
- 41i,7n,35p,209b,267s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on Parameter_Table_Master.pdf (2 pages, 54919 bytes).
-PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
- 21 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 32i,19n,37p,196b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on Parameter_Table_Master.dvi (1 page, 444 bytes).

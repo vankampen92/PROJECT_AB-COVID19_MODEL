@@ -1,0 +1,10 @@
+!?akefile
+!*.*
+*.a
+*.dat
+*.ps
+*.eps
+*.pdf
+*.so
+*.txt
+*.o
