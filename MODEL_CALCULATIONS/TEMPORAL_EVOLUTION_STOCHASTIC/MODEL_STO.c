@@ -2,19 +2,27 @@
 
 extern gsl_rng * r;
 
+extern int TYPE_of_TIME_DEPENDENCE;
+
 int M_O_D_E_L___S_T_O( Parameter_Table * Table )
 {
   int i,j,k, n;
   int I_Time, no_Patch;
-  int Bad_Times; 
-  Time_Control * Time = Table->T;
+  int Bad_Times;
+  double t; 
+  Time_Control * Time;
+  Time_Dependence_Control * TDC; 
+
+  Time = Table->T;
+  
+  TDC  = Table->TDC; 
   
   Parameter_Model * P = (Parameter_Model *)malloc( 1 * sizeof(Parameter_Model) );
   P_A_R_A_M_E_T_E_R___I_N_I_T_I_A_L_I_Z_A_T_I_O_N (Table, P);
   Table->P  = P;
   printf(" Parameter_Model structure has been correctly allocated and initiated\n");
   
-  I_Time    = Time->I_Time;
+  I_Time    = Table->T->I_Time;
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */  
   int MODEL_STATE_VARIABLES = Table->MODEL_STATE_VARIABLES;
   Table->Vector_Model_Variables = (double *)calloc( MODEL_STATE_VARIABLES, sizeof(double) );
@@ -42,7 +50,24 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   
   /* BEGIN: Main loop: a number of REALIZATIONS (stochastic temporal evolutions) is computed */
   printf("Entering Generation of Stochastic Realizations...\n");   Press_Key();
-  for (i=0; i < Time->Realizations; i++){
+  for (n=0; n < Table->T->Realizations; n++){
+    // Notice that TDC has not been initialized when TYPE_of_TIME_DEPENDENCE = 0
+    // This is the reason we need an 'extern int TYPE_of_TIME_DEPENDENCE' above!!!
+    if (TYPE_of_TIME_DEPENDENCE == 1) {
+      if(TDC->TYPE_2_PARAMETERS > 0) {
+	for(i = 0; i < TDC->TYPE_2_PARAMETERS; i++) {
+	  k = i + TDC->TYPE_0_PARAMETERS + TDC->TYPE_1_PARAMETERS;
+	  for(j = 0; j<TDC->No_of_TIMES; j++) {
+	    t = Time->Time_Vector[j];
+	    TDC->Dependent_Parameter[k][j] =Time_Dependence_Resolve(Table,
+								    TDC->Index_Dependent_Parameters[k],
+								    TDC->Forcing_Pattern_Parameters[k], t);
+	    
+	  }
+	}
+      }
+    }
+
     GSL_Init_Random_Seed(r); /* According to Computer time */
     /* Input variables: 
        . i, lable of current realization 
@@ -50,14 +75,14 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
        . Bad_Times is a measure of the performance of the sampling frequency. 
          If Bad_Times is high, interval times should be choosen smaller 
     */
-    S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S ( i, Table, &Bad_Times );
+    S_T_O_C_H_A_S_T_I_C___T_I_M_E___D_Y_N_A_M_I_C_S ( n, Table, &Bad_Times );
     
     /* End of the i-th STOCHASTIC REALIZATIONS */
-    printf("Realization: %d of a total of %d\n", i+1, Time->Realizations);
+    printf("Realization: %d of a total of %d\n", n+1, Table->T->Realizations);
     printf("Time failed in %d occasions out of %d time steps\n", Bad_Times, I_Time);
     printf("If the number of failed times is too big, EPSILON might be too small!\n");
-    printf("Try to choose a larger EPSILON [Current value: -tE %g]\n", Time->EPSILON);
-  }
+    printf("Try to choose a larger EPSILON [Current value: -tE %g]\n", Table->T->EPSILON);
+}
   /* END: End of STOCHASTIC REALIZATIONS */
 
   /* BEGIN : Averaging and saving stochastic realizations */
@@ -74,8 +99,8 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
 #if defined CPGPLOT_REPRESENTATION
   SAME_PLOT = 1; 
   C_P_G___S_U_B___P_L_O_T_T_I_N_G___E_R_R_O_R___B_A_R ( Table, SAME_PLOT, 
-							DATA_POINTS, Time->time_DEF, 
-							Time->AVE, Time->VAR ); 
+							DATA_POINTS, Table->T->time_DEF, 
+							Table->T->AVE, Table->T->VAR ); 
 #endif
   /*   END : Averaging stochastic realizations            */  
 
@@ -84,7 +109,7 @@ int M_O_D_E_L___S_T_O( Parameter_Table * Table )
   free( Table->Vector_Model_Int_Variables_Time_0 );
   
   Community_Free(PATCH, P);
-  free ( P );
+  free ( P ); 
   
   return(0);
 }

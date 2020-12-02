@@ -14,6 +14,8 @@ double  Linear_Trend_Function (Parameter_Table * , double );
 
 double Sinusoidal_Oscillation(double , double , double , double , double );
 
+double Random_Time_Dependence_between_Boundaries (Parameter_Table * Table, int parameter);
+
 void Time_Dependence_Control_Alloc ( Time_Control * ,
 				     Time_Dependence_Control * ,
 				     Parameter_Table * ,

@@ -113,21 +113,15 @@ pat_35 = 0;
 dep_36 = 36;
 pat_36 = 0;
 
-/* dep_37 = 17; */
-/* pat_37 = 0; */
+dep_37 = 37; 
+pat_37 = 0;
 
-/* dep_38 = 18; */
-/* pat_38 = 0; */
+dep_38 = 38;
+pat_38 = 0;
 
-/* dep_39 = 19; */
-/* pat_39 = 0; */
-
-/* dep_20 = 20; */
-/* pat_20 = 0;  */
-
-/* dep_21 = 21; */
-/* pat_21 = 0;  */
-                                   
+dep_39 = 39;
+pat_39 = 0;
+                        
 dependent_parameter = (int *)calloc(DEPENDENT_PARAMETERS_MAXIMUM, sizeof(int));
 forcing_pattern     = (int *)calloc(DEPENDENT_PARAMETERS_MAXIMUM, sizeof(int));
 

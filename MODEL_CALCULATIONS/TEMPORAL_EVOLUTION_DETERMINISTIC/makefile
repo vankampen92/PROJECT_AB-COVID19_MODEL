@@ -7,7 +7,7 @@
 # you compile only from here, compilation may fail when calling make. 
 # It means that you need to export these two environment variables:
 #
-# . ~$ export PROJECT_DIR=${HOME}/PROJECT_STD_AIDS_MODELS/
+# . ~$ export PROJECT_DIR=${HOME}/PROJECT_AB-COVID19_MODEL/
 # . ~$ export CPGPLOT=${HOME}/CPGPLOT/
 # 
 TIME_TREND_DIR=${PROJECT_DIR}Definition_Time_Trend_Dependence/

@@ -1,6 +1,9 @@
 #include <MODEL.h>
 
 // #define SAVING_AN_INSTANCE_OF_THE_TREND
+extern gsl_rng * r;   /* Global generator (define at the main program level */
+
+#define RANDOM (gsl_rng_uniform_pos(r))
 
 double Time_Dependence_Resolve(Parameter_Table * Table, int parameter, int pattern, double t)
 {
@@ -40,6 +43,10 @@ double Time_Dependence_Resolve(Parameter_Table * Table, int parameter, int patte
       value = Linear_Trend_Function (Table, t);
       break;
 
+      case 5: //Random time dependence)
+      value = Random_Time_Dependence_between_Boundaries (Table, parameter);
+      break;
+
       default :
       printf(" Trend_Control.c: Type of Trend is not defined\n");
       printf(" Trend pattern can be only 0, 1, 2, 3 or 4.\n");
@@ -65,6 +72,40 @@ double Time_Dependence_Resolve(Parameter_Table * Table, int parameter, int patte
 
   return(value);
 }
+
+double Random_Time_Dependence_between_Boundaries (Parameter_Table * Table, int parameter)
+{
+  double value, lo_P, hi_P;
+  int i, key, value_OK;
+
+  Parameter_Space * S = Table->S;
+  
+  value_OK = 0;
+  
+  for ( i=0; i < S->No_of_PARAMETERS; i++ ) {
+    key = S->Parameter_Index[i];
+
+    if(parameter == key) { 
+      lo_P = gsl_vector_get(S->P_min, i);
+      hi_P = gsl_vector_get(S->P_MAX, i);
+
+      value = lo_P + RANDOM * (hi_P - lo_P);
+
+      value_OK = 1; 
+    }
+    
+  }
+  
+  if (value_OK == 0 ){
+      printf("Time-dependent parameter %d is not well specified in the input argument list",
+	     parameter);
+      printf("The program will exit\n");
+      exit(0); 
+  }
+  
+  return(value); 
+}
+
 
 double Time_Dependence_Sigmoidal_Function ( Parameter_Table * Table,
 					    int parameter, double t)
