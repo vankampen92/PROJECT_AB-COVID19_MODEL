@@ -3,7 +3,7 @@
 /*                                                                           */
 /*                    HUMAN-VECTOR TRANSMITTED DISEASE DYNAMICS              */
 /*	                                                                     */
-/*                            David Alonso, 2011 (c)                         */
+/*                            David Alonso, 2021 (c)                         */
 /*                                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #define HUMAN_CONSTANT_POPULATION

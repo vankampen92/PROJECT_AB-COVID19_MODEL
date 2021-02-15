@@ -193,7 +193,7 @@ void Model_Variables_Code_into_Parameter_Table (Parameter_Table * P)
    /* SEI1I2AAdYR_AGE_MPOP * * * * * * * * * * * * * * * * * * * * * * */
    case 3:
 
-     P->TOTAL_No_of_DISEASE_STAGES = 11; /* This includes accumulated variables */
+     P->TOTAL_No_of_DISEASE_STAGES = 11; /* This includes the three accumulated variables */
      P->TOTAL_No_of_AGE_CLASSES    = 4;
      P->No_of_DISEASE_STAGES       = 8;
      
@@ -275,6 +275,63 @@ void Model_Variables_Code_into_Parameter_Table (Parameter_Table * P)
 	  
 	  P->L_3I0[i] = 34+ Q*i;     /* Label first infected class  (3: Seniors) */
 	  P->L_3I[i]  = 39+ Q*i;     /* Label last infected  class  */
+	}
+	
+	P->K = P->TOTAL_No_of_DISEASE_STAGES * P->TOTAL_No_of_AGE_CLASSES * P->No_of_LOCAL_POPULATIONS - 1;    
+     
+   break;
+
+   /* SIRD_AGE_MPOP * * * * * * * * * * * * * * * * * * * * * * */
+   case 4:
+
+     P->TOTAL_No_of_DISEASE_STAGES = 4; /* This includes accumulated variables */
+     P->TOTAL_No_of_AGE_CLASSES    = 4;
+     P->No_of_DISEASE_STAGES       = 3;
+     
+     P->TOTAL_No_of_EVENTS         = 100;  /* SEI1I2AAdYR_AGE_MPOP: Total Number of Events 
+					     within every patch */
+     P->No_of_EVENTS               = 25;   /* SEI1I2AAdYR_AGE_MPOP: Total Number of Events 
+					     within a patch and an age class */
+     P->nS  =  0; /* (: Children) */
+     P->nI1 =  1; 
+     P->nR =   2;
+     P->aD =   3;  /* Accumulated Number of Deaths */
+  
+     P->n0S =   0; /* (0: Children) */
+     P->n0I1 =  1; 
+     P->n0R =   2;
+     P->a0D =   3;  /* Accumulated Number of Deaths from Severe Symptoms                    */
+     
+     P->n1S =    4; /* (1: Students) */
+     P->n1I1 =   5; 
+     P->n1R =    6;
+     P->a1D =    7;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+     
+     P->n2S =    8; /* (2: Adults) */
+     P->n2I1 =   9; 
+     P->n2R =   10;
+     P->a2D =   11;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+
+     P->n3S =   12; /* (3: Seniors) */
+     P->n3I1 =  13; 
+     P->n3R =   14;
+     P->a3D =   15;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+
+     Q  = P->TOTAL_No_of_DISEASE_STAGES * P->TOTAL_No_of_AGE_CLASSES; 
+     /* Conventions */
+
+     for (i=0; i<P->No_of_LOCAL_POPULATIONS; i++) { 
+	  P->L_0I0[i] = 1 + Q*i;     /* Label first infected class  (0: Children) */
+	  P->L_0I[i]  = 1 + Q*i;     /* Label last infected  class  */
+	  
+	  P->L_1I0[i] = 5 + Q*i;     /* Label first infected class  (1: Students) */
+	  P->L_1I[i]  = 5 + Q*i;     /* Label last infected  class  */
+	  
+	  P->L_2I0[i] = 9 + Q*i;     /* Label first infected class  (2: Workers) */
+	  P->L_2I[i]  = 9 + Q*i;     /* Label last infected  class  */
+	  
+	  P->L_3I0[i] = 13 + Q*i;     /* Label first infected class  (3: Seniors) */
+	  P->L_3I[i]  = 13 + Q*i;     /* Label last infected  class  */
 	}
 	
 	P->K = P->TOTAL_No_of_DISEASE_STAGES * P->TOTAL_No_of_AGE_CLASSES * P->No_of_LOCAL_POPULATIONS - 1;    
