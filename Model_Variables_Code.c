@@ -300,22 +300,22 @@ void Model_Variables_Code_into_Parameter_Table (Parameter_Table * P)
      P->n0S =   0; /* (0: Children) */
      P->n0I1 =  1; 
      P->n0R =   2;
-     P->a0D =   3;  /* Accumulated Number of Deaths from Severe Symptoms                    */
+     P->a0D =   3;  /* Accumulated Number of Deaths from Severe Symptoms      */
      
      P->n1S =    4; /* (1: Students) */
      P->n1I1 =   5; 
      P->n1R =    6;
-     P->a1D =    7;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+     P->a1D =    7;  /* Accumulated Number of Deaths from Severe Symptoms     */
      
      P->n2S =    8; /* (2: Adults) */
      P->n2I1 =   9; 
      P->n2R =   10;
-     P->a2D =   11;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+     P->a2D =   11;  /* Accumulated Number of Deaths from Severe Symptoms     */
 
      P->n3S =   12; /* (3: Seniors) */
      P->n3I1 =  13; 
      P->n3R =   14;
-     P->a3D =   15;  /* Accumulated Number of Deaths from Severe Symptoms                  */
+     P->a3D =   15;  /* Accumulated Number of Deaths from Severe Symptoms     */
 
      Q  = P->TOTAL_No_of_DISEASE_STAGES * P->TOTAL_No_of_AGE_CLASSES; 
      /* Conventions */
